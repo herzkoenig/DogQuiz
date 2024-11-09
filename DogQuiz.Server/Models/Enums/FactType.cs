@@ -3,6 +3,8 @@
 public enum FactType
 {
     Historical,
-    Fun,
     Trivia,
+    Health,
+    Behavioral,
+    Physical
 }
