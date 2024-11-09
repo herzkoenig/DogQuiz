@@ -24,12 +24,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\DogBreeds\GoldenRetriver\" />
-    <Folder Include="Images\DogBreeds\FrenchBulldog\" />
-    <Folder Include="Images\DogBreeds\GermanShorthairedPointer\" />
-    <Folder Include="Images\DogBreeds\Poodle\" />
-    <Folder Include="Images\DogBreeds\WelshTerrier\" />
-    <Folder Include="Images\DogBreeds\StBernard\" />
+    <Folder Include="Images\Breeds\GoldenRetriever\" />
+    <Folder Include="Images\Breeds\FrenchBulldog\" />
+    <Folder Include="Images\Breeds\GermanShorthairedPointer\" />
+    <Folder Include="Images\Breeds\Beagle\" />
+    <Folder Include="Images\Breeds\Corgi\" />
+    <Folder Include="Images\Breeds\Akita\" />
+    <Folder Include="Images\Breeds\JackRusselTerrier\" />
+    <Folder Include="Images\Breeds\LabradorRetriever\" />
+    <Folder Include="Images\Breeds\Poodle\" />
+    <Folder Include="Images\Breeds\WelshTerrier\" />
+    <Folder Include="Images\Breeds\StBernard\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
-﻿namespace DogQuiz.Server.Models
+﻿namespace DogQuiz.Server.Models;
+
+public class NameInfo
 {
-    public class NameInfo
-    {
-    }
 }

@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 builder.Services.AddControllers();
 builder.Services.AddScoped<IBreedService, BreedService>();
 builder.Services.AddEndpointsApiExplorer();
@@ -17,10 +15,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 var app = builder.Build();
 
-// DIRTY HACK, we WILL come back to fix this
+// DIRTY HACK for early stages of development!
 var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-context.Database.EnsureDeleted(); 
+context.Database.EnsureDeleted();
 context.Database.EnsureCreated();
 
 app.UseDefaultFiles();
@@ -32,15 +30,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
-
 app.MapControllers();
-
 app.MapFallbackToFile("/index.html");
 
 app.Run();
