@@ -1,7 +1,6 @@
 ﻿using DogQuiz.Server.Data;
 using DogQuiz.Server.Models;
 using DogQuiz.Server.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,5 +24,18 @@ public class DogsController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         return Ok(await _context.Dogs.ToListAsync());
+    }
+
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(Dog), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Get(int id)
+    {
+        //var dog = await _context.Dogs.FirstOrDefaultAsync(d => d.Id == id);
+        //var dog = await _context.Dogs.SingleOrDefaultAsync(d => d.Id == id);
+        var dog = await _context.Dogs.FindAsync(id);
+
+        return dog == null ? NotFound() : Ok(dog);
+
     }
 }

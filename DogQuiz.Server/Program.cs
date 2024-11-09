@@ -1,17 +1,27 @@
 using DogQuiz.Server.Data;
 using DogQuiz.Server.Services;
 using DogQuiz.Server.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IDogService, DogService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
+
+// DIRTY HACK, we WILL come back to fix this
+var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+context.Database.EnsureDeleted(); 
+context.Database.EnsureCreated();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
