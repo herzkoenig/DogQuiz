@@ -1,5 +1,5 @@
-﻿namespace DogQuiz.Server.DTOs;
+﻿namespace DogQuiz.Server.Dtos;
 
-public class QuizResultDTO
+public class QuizResultDto
 {
 }

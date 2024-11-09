@@ -1,4 +1,5 @@
 ﻿using DogQuiz.Server.Data;
+using DogQuiz.Server.Dtos;
 using DogQuiz.Server.Models;
 using DogQuiz.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -49,19 +50,26 @@ public class DogsController : ControllerBase
     [HttpPut]
     [ProducesResponseType(typeof(Dog), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update([FromRoute]int id, [FromBody] Dog dog)
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] DogDto dogDto)
     {
         var existingDog = await _context.Dogs.FindAsync(id);
 
-        if(existingDog is null)
+        if (existingDog is null)
             return NotFound();
 
-        existingDog.Name = dog.Name;
-        existingDog.NameLocal = dog.NameLocal;
-        existingDog.NameFCI = dog.NameFCI;
-        existingDog.ImageUrl = dog.ImageUrl;
-        existingDog.History = dog.History;
-        existingDog.FunFacts = dog.FunFacts;
+        existingDog.Name = dogDto.Name ?? existingDog.Name;
+        existingDog.NameLocal = dogDto.NameLocal ?? existingDog.NameLocal;
+        existingDog.NameFCI = dogDto.NameFCI ?? existingDog.NameFCI;
+        existingDog.AlternativeNames = dogDto.AlternativeNames ?? existingDog.AlternativeNames;
+        existingDog.ImageUrl = dogDto.ImageUrl ?? existingDog.ImageUrl;
+        existingDog.Origin = dogDto.Origin ?? existingDog.Origin;
+        existingDog.Roles = dogDto.Roles ?? existingDog.Roles;
+        existingDog.Size = dogDto.Size ?? existingDog.Size;
+        existingDog.NotableDogs = dogDto.NotableDogs ?? existingDog.NotableDogs;
+        existingDog.CelebrityOwners = dogDto.CelebrityOwners ?? existingDog.CelebrityOwners;
+        existingDog.HistoricalFacts = dogDto.HistoricalFacts ?? existingDog.HistoricalFacts;
+        existingDog.FunFacts = dogDto.FunFacts ?? existingDog.FunFacts;
+
 
         await _context.SaveChangesAsync();
 
@@ -87,5 +95,4 @@ public class DogsController : ControllerBase
 
         return Ok();
     }
-
 }
