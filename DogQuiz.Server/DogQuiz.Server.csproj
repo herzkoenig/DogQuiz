@@ -24,7 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\Dogs\GoldenRetriver\" />
+    <Folder Include="Images\DogBreeds\GoldenRetriver\" />
+    <Folder Include="Images\DogBreeds\FrenchBulldog\" />
+    <Folder Include="Images\DogBreeds\GermanShorthairedPointer\" />
+    <Folder Include="Images\DogBreeds\Poodle\" />
+    <Folder Include="Images\DogBreeds\WelshTerrier\" />
+    <Folder Include="Images\DogBreeds\StBernard\" />
   </ItemGroup>
 
 </Project>

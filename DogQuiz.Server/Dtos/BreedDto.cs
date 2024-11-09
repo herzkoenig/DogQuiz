@@ -1,13 +1,14 @@
-﻿namespace DogQuiz.Server.Models;
+﻿
+using DogQuiz.Server.Models;
 
-public class Dog
+namespace DogQuiz.Server.Dtos;
+
+public class BreedDto
 {
-    public int Id { get; set; }
     public string? Name { get; set; }
-    public string? NameLocal { get; set; }
-    public string? NameFCI { get; set; }
-    public List<string>? AlternativeNames { get; set; }
-    public string? ImageUrl { get; set; }
+    public List<NameInfo>? Names { get; set; } // public string? NameLocal { get; set; }    public string? NameFCI { get; set; }
+    public List<string>? BreedVarieties { get; set; }
+    public ImageInfo? ImagePath { get; set; }
     public string? Origin { get; set; }
     public List<string>? Roles { get; set; }
     public string? Size { get; set; }

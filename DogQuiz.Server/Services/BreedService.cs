@@ -3,9 +3,9 @@ using DogQuiz.Server.Services.Interfaces;
 
 namespace DogQuiz.Server.Services;
 
-public class DogService : IDogService
+public class BreedService : IBreedService
 {
-    public Task<DogDto> CreateDog(DogDto dogDto)
+    public Task<BreedDto> CreateBreed(BreedDto dogDto)
     {
         throw new NotImplementedException();
     }
@@ -15,17 +15,17 @@ public class DogService : IDogService
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<DogDto>> GetAllDogs()
+    public Task<IEnumerable<BreedDto>> GetAllBreeds()
     {
         throw new NotImplementedException();
     }
 
-    public Task<DogDto> GetDogById(int dogId)
+    public Task<BreedDto> GetBreedById(int dogId)
     {
         throw new NotImplementedException();
     }
 
-    public Task UpdateDog(int dogId, DogDto dogDto)
+    public Task UpdateBreed(int dogId, BreedDto dogDto)
     {
         throw new NotImplementedException();
     }
