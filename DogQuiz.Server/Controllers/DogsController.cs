@@ -31,11 +31,61 @@ public class DogsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(int id)
     {
-        //var dog = await _context.Dogs.FirstOrDefaultAsync(d => d.Id == id);
-        //var dog = await _context.Dogs.SingleOrDefaultAsync(d => d.Id == id);
         var dog = await _context.Dogs.FindAsync(id);
 
         return dog == null ? NotFound() : Ok(dog);
-
     }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(Dog), StatusCodes.Status201Created)]
+    public async Task<IActionResult> Create([FromBody] Dog dog)
+    {
+        await _context.Dogs.AddAsync(dog);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(Get), new { id = dog.Id }, dog);
+    }
+
+    [HttpPut]
+    [ProducesResponseType(typeof(Dog), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Update([FromRoute]int id, [FromBody] Dog dog)
+    {
+        var existingDog = await _context.Dogs.FindAsync(id);
+
+        if(existingDog is null)
+            return NotFound();
+
+        existingDog.Name = dog.Name;
+        existingDog.NameLocal = dog.NameLocal;
+        existingDog.NameFCI = dog.NameFCI;
+        existingDog.ImageUrl = dog.ImageUrl;
+        existingDog.History = dog.History;
+        existingDog.FunFacts = dog.FunFacts;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(existingDog);
+    }
+
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Remove([FromRoute] int id)
+    {
+        var existingDog = await _context.Dogs.FindAsync(id);
+
+        if (existingDog is null)
+            return NotFound();
+
+        // Any of these options will remove the dog from the context.
+        // _context.Remove(existingDog);
+        // _context.Dogs.Remove(new Dog { Id = id});
+        _context.Dogs.Remove(existingDog);
+
+        await _context.SaveChangesAsync();
+
+        return Ok();
+    }
+
 }
