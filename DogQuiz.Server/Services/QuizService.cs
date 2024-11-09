@@ -25,15 +25,15 @@ public class QuizService : IQuizService
         throw new NotImplementedException();
     }
 
-    public Task<QuizSettingsDto> StartQuiz(int quizId)
-    {
-        throw new NotImplementedException();
-    }
+    //public Task<QuizSettingsDto> StartQuiz(int quizId)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
-    public Task<QuizResultDto> SubmitQuiz(int quizId, QuizSubmissionDto quizSubmissionDto)
-    {
-        throw new NotImplementedException();
-    }
+    //public Task<QuizResultDto> SubmitQuiz(int quizId, QuizSubmissionDto quizSubmissionDto)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     public Task UpdateQuiz(int quizId, TextQuizQuestionDto quizDto)
     {

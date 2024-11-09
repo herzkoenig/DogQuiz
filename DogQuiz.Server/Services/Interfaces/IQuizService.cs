@@ -42,7 +42,7 @@ public interface IQuizService
     /// </summary>
     /// <param name="quizId">The ID of the quiz to start.</param>
     /// <returns>An object containing the initial questions of the quiz.</returns>
-    Task<QuizSettingsDto> StartQuiz(int quizId);
+    //Task<QuizSettingsDto> StartQuiz(int quizId);
 
     /// <summary>
     /// Submits answers for a quiz and returns the result.
@@ -50,5 +50,5 @@ public interface IQuizService
     /// <param name="quizId">The ID of the quiz being submitted.</param>
     /// <param name="quizSubmissionDto">The data transfer object containing quiz answers.</param>
     /// <returns>An object containing the results of the quiz submission.</returns>
-    Task<QuizResultDto> SubmitQuiz(int quizId, QuizSubmissionDto quizSubmissionDto);
+    //Task<QuizResultDto> SubmitQuiz(int quizId, QuizSubmissionDto quizSubmissionDto);
 }
