@@ -1,4 +1,4 @@
-﻿namespace DogQuiz.Server.Enums;
+﻿namespace DogQuiz.Server.Models.Enums;
 
 /// <summary>
 /// Specifies the type of question format in the quiz.

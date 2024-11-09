@@ -1,4 +1,4 @@
-﻿namespace DogQuiz.Server.Enums;
+﻿namespace DogQuiz.Server.Models.Enums;
 
 public enum UserRole
 {

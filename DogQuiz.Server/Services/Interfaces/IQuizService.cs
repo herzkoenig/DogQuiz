@@ -8,28 +8,28 @@ public interface IQuizService
     /// Retrieves a list of all quizzes.
     /// </summary>
     /// <returns>A list of QuizDto objects.</returns>
-    Task<IEnumerable<QuizDto>> GetAllQuizzes();
+    Task<IEnumerable<TextQuizQuestionDto>> GetAllQuizzes();
 
     /// <summary>
     /// Retrieves a quiz by its unique identifier.
     /// </summary>
     /// <param name="quizId">The ID of the quiz.</param>
     /// <returns>The QuizDto object if found, otherwise null.</returns>
-    Task<QuizDto> GetQuizById(int quizId);
+    Task<TextQuizQuestionDto> GetQuizById(int quizId);
 
     /// <summary>
     /// Creates a new quiz in the system.
     /// </summary>
     /// <param name="quizDto">The data transfer object representing the quiz to be created.</param>
     /// <returns>The created QuizDto object.</returns>
-    Task<QuizDto> CreateQuiz(QuizDto quizDto);
+    Task<TextQuizQuestionDto> CreateQuiz(TextQuizQuestionDto quizDto);
 
     /// <summary>
     /// Updates an existing quiz by its ID.
     /// </summary>
     /// <param name="quizId">The ID of the quiz to update.</param>
     /// <param name="quizDto">The data transfer object containing updated fields.</param>
-    Task UpdateQuiz(int quizId, QuizDto quizDto);
+    Task UpdateQuiz(int quizId, TextQuizQuestionDto quizDto);
 
     /// <summary>
     /// Deletes a quiz by its ID.
@@ -42,7 +42,7 @@ public interface IQuizService
     /// </summary>
     /// <param name="quizId">The ID of the quiz to start.</param>
     /// <returns>An object containing the initial questions of the quiz.</returns>
-    Task<QuizStartDto> StartQuiz(int quizId);
+    Task<QuizSettingsDto> StartQuiz(int quizId);
 
     /// <summary>
     /// Submits answers for a quiz and returns the result.

@@ -5,7 +5,7 @@ namespace DogQuiz.Server.Services;
 
 public class QuizService : IQuizService
 {
-    public Task<QuizDto> CreateQuiz(QuizDto quizDto)
+    public Task<TextQuizQuestionDto> CreateQuiz(TextQuizQuestionDto quizDto)
     {
         throw new NotImplementedException();
     }
@@ -15,17 +15,17 @@ public class QuizService : IQuizService
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<QuizDto>> GetAllQuizzes()
+    public Task<IEnumerable<TextQuizQuestionDto>> GetAllQuizzes()
     {
         throw new NotImplementedException();
     }
 
-    public Task<QuizDto> GetQuizById(int quizId)
+    public Task<TextQuizQuestionDto> GetQuizById(int quizId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<QuizStartDto> StartQuiz(int quizId)
+    public Task<QuizSettingsDto> StartQuiz(int quizId)
     {
         throw new NotImplementedException();
     }
@@ -35,7 +35,7 @@ public class QuizService : IQuizService
         throw new NotImplementedException();
     }
 
-    public Task UpdateQuiz(int quizId, QuizDto quizDto)
+    public Task UpdateQuiz(int quizId, TextQuizQuestionDto quizDto)
     {
         throw new NotImplementedException();
     }
