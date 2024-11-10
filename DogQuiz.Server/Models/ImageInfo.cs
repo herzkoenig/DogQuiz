@@ -1,4 +1,6 @@
-﻿namespace DogQuiz.Server.Models;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace DogQuiz.Server.Models;
 
 public class ImageInfo
 {

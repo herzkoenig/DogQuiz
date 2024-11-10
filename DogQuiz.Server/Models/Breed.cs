@@ -1,14 +1,16 @@
 ﻿using DogQuiz.Server.Models.Enums;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DogQuiz.Server.Models;
 
 public class Breed
 {
-    public Guid Id { get; set; }
-    [Required]
-    public string Name { get; set; } = default!;
-    public List<NameInfo> AlternateNames { get; set; } = new List<NameInfo>();
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public BreedName PrimaryName => AlternativeNames.FirstOrDefault(bn => bn.IsPrimary);
+    public List<BreedName> AlternativeNames { get; set; } = new List<BreedName>();
     public ImageInfo? MainImage { get; set; }
     public List<ImageInfo> AllImages { get; set; } = new List<ImageInfo>();
     public List<BreedVariety> BreedVarieties { get; set; } = new List<BreedVariety>();

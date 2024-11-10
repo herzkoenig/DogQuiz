@@ -29,9 +29,7 @@ public class BreedService : IBreedService
     {
         return await _context.Breeds.Select(b => new BreedDto
         {
-            Id = b.Id,
             Name = b.Name,
-            Origin = b.Origin,
         }).ToListAsync();
     }
 

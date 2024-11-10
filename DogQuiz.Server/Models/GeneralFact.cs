@@ -2,4 +2,5 @@
 
 public class GeneralFact
 {
+    public int Id { get; set; }
 }
