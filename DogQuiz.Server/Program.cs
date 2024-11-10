@@ -22,7 +22,7 @@ context.Database.EnsureDeleted();
 context.Database.EnsureCreated();
 
 app.UseDefaultFiles();
-app.UseStaticFiles();
+//app.UseStaticFiles();
 
 if (app.Environment.IsDevelopment())
 {

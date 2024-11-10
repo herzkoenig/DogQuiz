@@ -1,6 +1,6 @@
 ﻿namespace DogQuiz.Server.Models;
 
-public class NotableDog
+public class NotableOwners
 {
     public int Id { get; set; }
     public int BreedId { get; set; }

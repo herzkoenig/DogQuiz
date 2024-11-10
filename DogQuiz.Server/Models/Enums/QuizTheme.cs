@@ -3,7 +3,7 @@
 public enum QuizTheme
 {
     General,
-#if false
+/*
     PuppyImagesOnly,
     PopularBreeds,
     RareBreeds,
@@ -14,5 +14,5 @@ public enum QuizTheme
     PopCulture,
     FamousPersons,
     FamousDogs,
-#endif
+*/
 }

@@ -94,11 +94,11 @@ public class BreedsController : ControllerBase
     //[ProducesResponseType(StatusCodes.Status404NotFound)]
     //public async Task<IActionResult> GetImages(int id)
     //{
-    //    var breed = await _context.Breeds.Include(d => d.AllImages).FirstOrDefaultAsync(d => d.Id == id);
+    //    var breed = await _context.Breeds.Include(d => d.OtherImages).FirstOrDefaultAsync(d => d.Id == id);
 
     //    if (breed == null)
     //        return NotFound();
 
-    //    return Ok(breed.AllImages);
+    //    return Ok(breed.OtherImages);
     //}
 }

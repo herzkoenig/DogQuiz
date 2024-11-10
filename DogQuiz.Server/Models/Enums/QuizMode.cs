@@ -7,7 +7,7 @@ public enum QuizMode
     /// </summary>
     FixedQuestionCount,
 
-#if false
+/*
     /// <summary>
     /// Answer as many questions as possible within a time limit.
     /// </summary>
@@ -42,5 +42,5 @@ public enum QuizMode
     /// Adjusts difficulty based on user performance.
     /// </summary>
     AdaptiveMode
-#endif
+*/
 }

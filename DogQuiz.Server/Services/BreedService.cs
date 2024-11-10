@@ -1,5 +1,6 @@
 ﻿using DogQuiz.Server.Data;
 using DogQuiz.Server.Dtos;
+using DogQuiz.Server.Models;
 using DogQuiz.Server.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,11 @@ public class BreedService : IBreedService
     public Task<BreedDto> CreateBreed(BreedDto dogDto)
     {
         throw new NotImplementedException();
+
+        //if (!breed.IsValid())
+        //{
+        //    throw new InvalidOperationException("The breed must have at least one alternative name.");
+        //}
     }
 
     public Task DeleteDog(int dogId)

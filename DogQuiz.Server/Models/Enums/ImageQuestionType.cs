@@ -1,10 +1,10 @@
 ﻿namespace DogQuiz.Server.Models.Enums;
 
-public enum QuestionType
+public enum ImageQuestionType
 {
     SingleImageMultipleNames,
     MultipleImagesSingleName,
-#if false
+/*
     MatchImagesToNames,
     TrueOrFalse,
     SingleChoice,
@@ -18,5 +18,5 @@ public enum QuestionType
     FamousPerson,
     SpellingChallenge,
     ArrangeLetters
-#endif
+*/
 }

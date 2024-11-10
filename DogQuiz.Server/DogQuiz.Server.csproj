@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Configurations\" />
     <Folder Include="Images\Breeds\Golden Retriever\" />
     <Folder Include="Images\Breeds\French Bulldog\" />
     <Folder Include="Images\Breeds\German Shorthaired Pointer\" />
@@ -42,18 +43,6 @@
     <Folder Include="Images\Breeds\Poodle\" />
     <Folder Include="Images\Breeds\Welsh Terrier\" />
     <Folder Include="Images\Breeds\St. Bernard\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Models\Enums\QuizMode.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="EFModel1.cs">
-      <DependentUpon>EFModel1.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
