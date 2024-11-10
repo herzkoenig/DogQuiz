@@ -11,14 +11,14 @@ public class Breed
     public List<NameInfo> AlternateNames { get; set; } = new List<NameInfo>();
     public ImageInfo? MainImage { get; set; }
     public List<ImageInfo> AllImages { get; set; } = new List<ImageInfo>();
+    public List<BreedVariety> BreedVarieties { get; set; } = new List<BreedVariety>();
     public string? Description { get; set; }
     public string? Origin { get; set; }
-    public List<BreedVariety> BreedVarieties { get; set; } = new List<BreedVariety>();
-    public List<TextQuizQuestion> QuizQuestions { get; set; } = new List<TextQuizQuestion>();
+    public List<QuizQuestion> QuizQuestions { get; set; } = new List<QuizQuestion>();
+    public List<BreedFact> Facts { get; set; } = new List<BreedFact>();
     public List<BreedRole> Roles { get; set; } = new List<BreedRole>();
     public List<NotableDog> NotableDogs { get; set; } = new List<NotableDog>();
     public List<FamousOwner> FamousOwners { get; set; } = new List<FamousOwner>();
-    public List<BreedFact> Facts { get; set; } = new List<BreedFact>();
     public ImageQuizMetadata Metadata { get; set; } = new ImageQuizMetadata();
 }
 

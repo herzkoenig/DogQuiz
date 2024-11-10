@@ -1,6 +1,9 @@
-﻿namespace DogQuiz.Server.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DogQuiz.Server.Models;
+
+public class BreedVariety
 {
-    public class BreedVariety
-    {
-    }
+    [Required]
+    public Breed AssociatedBreed { get; set; }
 }

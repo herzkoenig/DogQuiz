@@ -38,4 +38,8 @@
     <Folder Include="Images\Breeds\St. Bernard\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Models\Enums\QuizMode.cs" />
+  </ItemGroup>
+
 </Project>

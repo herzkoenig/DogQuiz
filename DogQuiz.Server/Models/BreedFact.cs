@@ -8,7 +8,7 @@ public class BreedFact
     [Required]
     public Breed AssociatedBreed { get; set; }
     [Required]
-    public string Content { get; set; }
-    [Required]
     public FactType Type { get; set; }
+    [Required]
+    public string Content { get; set; }
 }

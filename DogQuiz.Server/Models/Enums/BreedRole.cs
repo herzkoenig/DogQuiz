@@ -2,18 +2,17 @@
 
 public enum BreedRole
 {
-    Guard,
+    Guarding,
     Herding,
-    Companion,
     Hunting,
     Working,
-    Rescue,
-    Service,
+    SearchAndRescue,
+    Assistance,
     Therapy,
-    Guide,
-    ScentDetection,
+    Detection,
     Show,
     Racing,
     Agility,
-    Sled
+    Sled,
+    Companion,
 }

@@ -1,6 +1,6 @@
 ﻿namespace DogQuiz.Server.Models
 {
-    public class TextQuizQuestion
+    public class QuizQuestion
     {
     }
 }

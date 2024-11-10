@@ -4,12 +4,19 @@ public enum QuestionType
 {
     SingleImageMultipleNames,
     MultipleImagesSingleName,
+#if false
+    MatchImagesToNames,
     TrueOrFalse,
-    SingleChoiceText,
-    MultipleChoiceText,
-    MatchImageToBreed,
-    IdentifyBreedFromDescription,
-    FillInTheBlank, // e.g. origin, role, health, historical use, coat type, size, famous owner, ...
+    SingleChoice,
+    MultipleChoice,
+    IdentifyBreedFromText,
+    FillInTheBlank,
     GuessTheOrigin,
-    MatchBreedToRole
+    MultipleGuessTheOrigin,
+    MatchBreedToRole,
+    NonBreedSpecific,
+    FamousPerson,
+    SpellingChallenge,
+    ArrangeLetters
+#endif
 }
