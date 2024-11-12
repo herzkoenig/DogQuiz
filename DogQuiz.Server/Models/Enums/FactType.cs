@@ -2,6 +2,7 @@
 
 public enum FactType
 {
+    General,
     Historical,
     Trivia,
     Health,

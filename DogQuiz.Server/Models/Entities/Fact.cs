@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DogQuiz.Server.Models.Entities;
 
-public class BreedFact : AuditableEntity
+public class Fact : AuditableEntity
 {
     public int Id { get; set; }
-    public int BreedId { get; set; }
+    public int? BreedId { get; set; }
     public FactType Type { get; set; }
     public required string Content { get; set; }
     public Breed? Breed { get; set; }

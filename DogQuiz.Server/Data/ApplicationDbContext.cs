@@ -8,7 +8,7 @@ public class ApplicationDbContext : DbContext
 {
     public DbSet<Answer> Answers => Set<Answer>();
     public DbSet<Breed> Breeds => Set<Breed>();
-    public DbSet<BreedFact> BreedFacts => Set<BreedFact>();
+    public DbSet<Fact> BreedFacts => Set<Fact>();
     public DbSet<BreedName> BreedNames => Set<BreedName>();
     public DbSet<BreedRole> BreedRoles => Set<BreedRole>();
     public DbSet<BreedTag> BreedTags => Set<BreedTag>();
@@ -39,7 +39,7 @@ public class ApplicationDbContext : DbContext
         });
 
         // MODEL: BreedFact
-        modelBuilder.Entity<BreedFact>(entity =>
+        modelBuilder.Entity<Fact>(entity =>
         {
             entity.Property(bf => bf.BreedId).IsRequired(); // Required: BreedFact.BreedId
             entity.Property(bf => bf.Content).IsRequired(); // Required: BreedFact.Text
