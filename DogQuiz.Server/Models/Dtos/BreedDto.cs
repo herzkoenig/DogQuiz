@@ -1,8 +1,7 @@
-﻿
-using DogQuiz.Server.Models;
+﻿using DogQuiz.Server.Models;
 using DogQuiz.Server.Models.Enums;
 
-namespace DogQuiz.Server.Dtos;
+namespace DogQuiz.Server.Models.Dtos;
 
 public class BreedDto
 {

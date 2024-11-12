@@ -1,4 +1,4 @@
-﻿using DogQuiz.Server.Models;
+﻿using DogQuiz.Server.Models.Entities;
 using DogQuiz.Server.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +13,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<BreedRole> BreedRoles => Set<BreedRole>();
     public DbSet<BreedTag> BreedTags => Set<BreedTag>();
     public DbSet<BreedVariety> BreedVarieties => Set<BreedVariety>();
-    public DbSet<GeneralFact> GeneralFacts => Set<GeneralFact>();
     public DbSet<ImageDetail> ImageDetails => Set<ImageDetail>();
     public DbSet<NotableDog> NotableDogs => Set<NotableDog>();
     public DbSet<NotableOwner> NotableOwners => Set<NotableOwner>();

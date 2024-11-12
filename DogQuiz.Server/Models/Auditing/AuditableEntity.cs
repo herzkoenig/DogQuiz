@@ -1,9 +1,9 @@
 ﻿using DogQuiz.Server.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace DogQuiz.Server.Models;
+namespace DogQuiz.Server.Models.Auditing;
 
-public class AuditableEntity
+public abstract class AuditableEntity
 {
     public DateTime DateAdded { get; set; }
     public DateTime? DateUpdated { get; set; }

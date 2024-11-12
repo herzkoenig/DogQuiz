@@ -1,4 +1,6 @@
-﻿namespace DogQuiz.Server.Models;
+﻿using DogQuiz.Server.Models.Auditing;
+
+namespace DogQuiz.Server.Models.Entities;
 
 public class ImageDetail : AuditableEntity
 {

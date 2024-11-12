@@ -1,4 +1,4 @@
-﻿using DogQuiz.Server.Dtos;
+﻿using DogQuiz.Server.Models.Dtos;
 
 namespace DogQuiz.Server.Services.Interfaces;
 
@@ -8,28 +8,28 @@ public interface IQuizService
     /// Retrieves a list of all quizzes.
     /// </summary>
     /// <returns>A list of QuizDto objects.</returns>
-    Task<IEnumerable<TextQuizQuestionDto>> GetAllQuizzes();
+    Task<IEnumerable<QuestionDto>> GetAllQuizzes();
 
     /// <summary>
     /// Retrieves a quiz by its unique identifier.
     /// </summary>
     /// <param name="quizId">The ID of the quiz.</param>
     /// <returns>The QuizDto object if found, otherwise null.</returns>
-    Task<TextQuizQuestionDto> GetQuizById(int quizId);
+    Task<QuestionDto> GetQuizById(int quizId);
 
     /// <summary>
     /// Creates a new quiz in the system.
     /// </summary>
     /// <param name="quizDto">The data transfer object representing the quiz to be created.</param>
     /// <returns>The created QuizDto object.</returns>
-    Task<TextQuizQuestionDto> CreateQuiz(TextQuizQuestionDto quizDto);
+    Task<QuestionDto> CreateQuiz(QuestionDto quizDto);
 
     /// <summary>
     /// Updates an existing quiz by its ID.
     /// </summary>
     /// <param name="quizId">The ID of the quiz to update.</param>
     /// <param name="quizDto">The data transfer object containing updated fields.</param>
-    Task UpdateQuiz(int quizId, TextQuizQuestionDto quizDto);
+    Task UpdateQuiz(int quizId, QuestionDto quizDto);
 
     /// <summary>
     /// Deletes a quiz by its ID.

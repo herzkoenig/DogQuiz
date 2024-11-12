@@ -1,13 +1,13 @@
 ﻿using DogQuiz.Server.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace DogQuiz.Server.Models.CreateDummyData;
+namespace DogQuiz.Server.Models;
 
 public class CreateDummyData(DbContext context)
 {
     private readonly DbContext context = context;
 
-    public void CreateDataData()
+    public void CreateData()
     {
         //var breed = new Breed
         //{

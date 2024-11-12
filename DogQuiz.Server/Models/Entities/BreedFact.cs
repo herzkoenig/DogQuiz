@@ -1,7 +1,8 @@
-﻿using DogQuiz.Server.Models.Enums;
+﻿using DogQuiz.Server.Models.Auditing;
+using DogQuiz.Server.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace DogQuiz.Server.Models;
+namespace DogQuiz.Server.Models.Entities;
 
 public class BreedFact : AuditableEntity
 {

@@ -1,5 +1,5 @@
 using DogQuiz.Server.Data;
-using DogQuiz.Server.Models.CreateDummyData;
+using DogQuiz.Server.Models;
 using DogQuiz.Server.Services;
 using DogQuiz.Server.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +25,7 @@ using (var scope = app.Services.CreateScope())
 
     // Seed data
     var dataInitializer = new CreateDummyData(context);
-    dataInitializer.CreateDummyData();
+    dataInitializer.CreateData();
 }
 
 app.UseDefaultFiles();

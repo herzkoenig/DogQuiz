@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DogQuiz.Server.Dtos;
+namespace DogQuiz.Server.Models.Dtos;
 
-public class TextQuizQuestionDto
+public class QuestionDto
 {
     public Guid QuestionId { get; set; }
     [Required]
-    public string QuestionText { get; set; }
+    public string Text { get; set; }
     public List<string> Options { get; set; } = new List<string>();
     public string? ImageUrl { get; set; }
     public int QuestionNumber { get; set; }

@@ -1,11 +1,11 @@
-﻿using DogQuiz.Server.Dtos;
+﻿using DogQuiz.Server.Models.Dtos;
 using DogQuiz.Server.Services.Interfaces;
 
 namespace DogQuiz.Server.Services;
 
 public class QuizService : IQuizService
 {
-    public Task<TextQuizQuestionDto> CreateQuiz(TextQuizQuestionDto quizDto)
+    public Task<QuestionDto> CreateQuiz(QuestionDto quizDto)
     {
         throw new NotImplementedException();
     }
@@ -15,12 +15,12 @@ public class QuizService : IQuizService
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<TextQuizQuestionDto>> GetAllQuizzes()
+    public Task<IEnumerable<QuestionDto>> GetAllQuizzes()
     {
         throw new NotImplementedException();
     }
 
-    public Task<TextQuizQuestionDto> GetQuizById(int quizId)
+    public Task<QuestionDto> GetQuizById(int quizId)
     {
         throw new NotImplementedException();
     }
@@ -35,7 +35,7 @@ public class QuizService : IQuizService
     //    throw new NotImplementedException();
     //}
 
-    public Task UpdateQuiz(int quizId, TextQuizQuestionDto quizDto)
+    public Task UpdateQuiz(int quizId, QuestionDto quizDto)
     {
         throw new NotImplementedException();
     }

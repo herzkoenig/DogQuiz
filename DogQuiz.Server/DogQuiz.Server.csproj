@@ -32,17 +32,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Configurations\" />
-    <Folder Include="Images\Breeds\Golden Retriever\" />
-    <Folder Include="Images\Breeds\French Bulldog\" />
-    <Folder Include="Images\Breeds\German Shorthaired Pointer\" />
-    <Folder Include="Images\Breeds\Beagle\" />
-    <Folder Include="Images\Breeds\Welsh Corgi\" />
-    <Folder Include="Images\Breeds\Akita\" />
-    <Folder Include="Images\Breeds\Jack Russel Terrier\" />
-    <Folder Include="Images\Breeds\Labrador Retriever\" />
-    <Folder Include="Images\Breeds\Poodle\" />
-    <Folder Include="Images\Breeds\Welsh Terrier\" />
-    <Folder Include="Images\Breeds\St. Bernard\" />
   </ItemGroup>
 
   <ItemGroup>

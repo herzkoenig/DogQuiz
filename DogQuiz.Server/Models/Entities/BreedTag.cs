@@ -1,4 +1,4 @@
-﻿namespace DogQuiz.Server.Models
+﻿namespace DogQuiz.Server.Models.Entities
 {
     public class BreedTag
     {
