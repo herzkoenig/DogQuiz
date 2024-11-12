@@ -1,6 +1,6 @@
 ﻿namespace DogQuiz.Server.Models;
 
-public class ImageInfo
+public class ImageDetail : AuditableEntity
 {
     public string? Folder { get; set; }
     public string? FileName { get; set; }
@@ -16,7 +16,7 @@ public class ImageInfo
     public long? FileSize { get; set; }
     public string? Format { get; set; }
     public string? AltText { get; set; }
-    public List<string>? Tags { get; set; }
+    public List<string>? BreedTags { get; set; }
     public bool IsPrimary { get; set; }
     public string? UsageContext { get; set; }
 

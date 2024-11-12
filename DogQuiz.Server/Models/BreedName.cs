@@ -1,6 +1,6 @@
 ﻿namespace DogQuiz.Server.Models;
 
-public class BreedName
+public class BreedName : AuditableEntity
 {
     public int Id { get; set; }
     public int BreedId { get; set; }

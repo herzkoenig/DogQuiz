@@ -90,7 +90,7 @@ public class BreedsController : ControllerBase
     //}
 
     //[HttpGet("{Guid:Guid}/images")]
-    //[ProducesResponseType(typeof(List<ImageInfo>), StatusCodes.Status200OK)]
+    //[ProducesResponseType(typeof(List<ImageDetail>), StatusCodes.Status200OK)]
     //[ProducesResponseType(StatusCodes.Status404NotFound)]
     //public async Task<IActionResult> GetImages(int id)
     //{

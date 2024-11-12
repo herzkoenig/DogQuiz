@@ -1,6 +1,6 @@
 ﻿namespace DogQuiz.Server.Models.Enums;
 
-public enum BreedRole
+public enum BreedRoleType
 {
     Guarding,
     Herding,

@@ -1,4 +1,5 @@
 using DogQuiz.Server.Data;
+using DogQuiz.Server.Models.CreateDummyData;
 using DogQuiz.Server.Services;
 using DogQuiz.Server.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 var app = builder.Build();
 
 // DIRTY HACK for early stages of development!
-var scope = app.Services.CreateScope();
-var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-context.Database.EnsureDeleted();
-context.Database.EnsureCreated();
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    context.Database.EnsureDeleted();
+    context.Database.EnsureCreated();
+
+    // Seed data
+    var dataInitializer = new CreateDummyData(context);
+    dataInitializer.CreateDummyData();
+}
 
 app.UseDefaultFiles();
 //app.UseStaticFiles();
@@ -36,3 +43,4 @@ app.MapControllers();
 app.MapFallbackToFile("/index.html");
 
 app.Run();
+

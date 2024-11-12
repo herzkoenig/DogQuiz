@@ -3,10 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DogQuiz.Server.Models;
 
-public class BreedFact
+public class BreedFact : AuditableEntity
 {
     public int Id { get; set; }
-    [Required]
     public int BreedId { get; set; }
     public FactType Type { get; set; }
     public required string Content { get; set; }

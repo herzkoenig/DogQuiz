@@ -4,6 +4,7 @@ public enum ImageQuestionType
 {
     SingleImageMultipleNames,
     MultipleImagesSingleName,
+    StaticQuestion,
 /*
     MatchImagesToNames,
     TrueOrFalse,
