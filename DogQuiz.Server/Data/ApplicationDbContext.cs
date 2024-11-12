@@ -8,15 +8,16 @@ public class ApplicationDbContext : DbContext
 {
     public DbSet<Answer> Answers => Set<Answer>();
     public DbSet<Breed> Breeds => Set<Breed>();
-    public DbSet<Fact> BreedFacts => Set<Fact>();
     public DbSet<BreedName> BreedNames => Set<BreedName>();
     public DbSet<BreedRole> BreedRoles => Set<BreedRole>();
-    public DbSet<BreedTag> BreedTags => Set<BreedTag>();
     public DbSet<BreedVariety> BreedVarieties => Set<BreedVariety>();
+    public DbSet<Fact> Facts => Set<Fact>();
     public DbSet<ImageDetail> ImageDetails => Set<ImageDetail>();
     public DbSet<NotableDog> NotableDogs => Set<NotableDog>();
     public DbSet<NotableOwner> NotableOwners => Set<NotableOwner>();
     public DbSet<Question> Questions => Set<Question>();
+    public DbSet<Tag> Tags => Set<Tag>();
+    public DbSet<TagGroup> TagGroups => Set<TagGroup>();
 
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

@@ -17,9 +17,8 @@ public class Breed : AuditableEntity
     public int? Difficulty { get; set; }
     public ICollection<Question> Questions { get; } = new List<Question>();
     public ICollection<BreedRole> Roles { get; } = new List<BreedRole>();
-    public ICollection<BreedTag> BreedTags { get; set; } = new List<BreedTag>();
     public ICollection<Fact> Facts { get; } = new List<Fact>();
     public ICollection<NotableDog> NotableDogs { get; } = new List<NotableDog>();
     public ICollection<NotableOwner> NotableOwners { get; } = new List<NotableOwner>();
+    public ICollection<Tag> BreedTags { get; set; } = new List<Tag>();
 }
-
