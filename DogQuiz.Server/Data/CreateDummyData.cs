@@ -1,7 +1,7 @@
 ﻿using DogQuiz.Server.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace DogQuiz.Server.Models;
+namespace DogQuiz.Server.Data;
 
 public class CreateDummyData(DbContext context)
 {
