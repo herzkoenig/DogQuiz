@@ -10,18 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Configurations\**" />
-    <Content Remove="Data\Configurations\**" />
-    <EmbeddedResource Remove="Data\Configurations\**" />
-    <None Remove="Data\Configurations\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Audit.EntityFramework.Core" Version="27.1.1" />
     <PackageReference Include="Audit.EntityFramework.Identity.Core" Version="27.1.1" />
     <PackageReference Include="Audit.NET" Version="27.1.1" />
     <PackageReference Include="Audit.NET.SqlServer" Version="27.1.1" />
     <PackageReference Include="Audit.WebApi.Core" Version="27.1.1" />
+    <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
+    <PackageReference Include="Bogus" Version="35.6.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>9.0.0</Version>
@@ -35,7 +30,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="9.0.0" />
     <PackageReference Include="Riok.Mapperly" Version="4.1.0" />
+    <PackageReference Include="SendGrid" Version="9.29.3" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     <PackageReference Include="SixLabors.ImageSharp.Web" Version="3.1.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
   </ItemGroup>
@@ -48,6 +46,10 @@
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

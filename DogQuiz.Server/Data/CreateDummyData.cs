@@ -1,4 +1,6 @@
-﻿using DogQuiz.Server.Models.Enums;
+﻿using Bogus;
+using DogQuiz.Server.Models.Entities;
+using DogQuiz.Server.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace DogQuiz.Server.Data;
@@ -9,251 +11,91 @@ public class CreateDummyData(DbContext context)
 
     public void CreateData()
     {
-        //var breed = new Breed
-        //{
-        //    Name = "Labrador Retriever",
-        //    Description = "A popular family dog known for its friendly nature and intelligence.",
-        //    Origin = "Canada",
-        //    Difficulty = 2,
-        //    Image = new ImageDetail
+
+        /* NOT FULLY WORKING YET */
+        //var faker = new Faker();
+        //var breedFaker = new Faker<Breed>()
+        //    .RuleFor(b => b.Name, f => f.Random.Word() + $" {f.Random.Word}".OrNull(f, .3f) + $" {f.Random.Word}".OrNull(f, .8f))
+        //    .RuleFor(b => b.Description, f => f.Lorem.Sentence(f.Random.Int(1, 10)).OrNull(f, .4f))
+        //    .RuleFor(b => b.Origin, f => f.Address.Country())
+        //    .RuleFor(b => b.Difficulty, f => f.Random.Int(1, 10).OrNull(f, .3f))
+        //    .RuleFor(b => b.Image, f => new ImageDetail
         //    {
-        //        Folder = "Images/Breeds/Labrador",
-        //        FileName = "labrador_primary.jpg",
-        //        Attribution = "Photo by Jane Doe",
-        //        License = "CC BY-SA 4.0"
-        //    }
-        //};
+        //        Folder = "images/breeds",
+        //        FileName = f.System.FileName("jpg"),
+        //        Attribution = f.Name.FullName(),
+        //        License = f.Random.Word() + " License"
+        //    })
+        //    .RuleFor(b => b.AdditionalImages, f => new Faker<ImageDetail>()
+        //        .RuleFor(i => i.Folder, "Images/breeds")
+        //        .RuleFor(i => i.FileName, f => f.System.FileName("jpg"))
+        //        .RuleFor(i => i.Attribution, f => f.Name.FullName())
+        //        .RuleFor(i => i.License, f => f.Random.Word() + " License")
+        //        .Generate(f.Random.Int(1, 3)))  // Generates 1 to 3 additional images
+        //    .RuleFor(b => b.AdditionalNames, f => new Faker<BreedName>()
+        //        .RuleFor(n => n.Id, f => f.Random.Int(1, 1000))
+        //        .RuleFor(n => n.BreedId, f => f.Random.Int(1, 1000))
+        //        .RuleFor(n => n.Name, f => f.Commerce.ProductName())
+        //        .Generate(f.Random.Int(1, 2)))  // Generates 1 or 2 additional names
+        //    .RuleFor(b => b.Varieties, f => new Faker<BreedVariety>()
+        //        .RuleFor(v => v.Id, f => f.Random.Int(1, 1000))
+        //        .RuleFor(v => v.BreedId, f => f.Random.Int(1, 1000))
+        //        .RuleFor(v => v.Name, f => f.Random.Word() + " Variety")
+        //        .Generate(f.Random.Int(0, 2)))  // Generates up to 2 varieties
+        //    .RuleFor(b => b.Roles, f => new Faker<BreedRole>()
+        //        .RuleFor(r => r.Id, f => f.Random.Int(1, 1000))
+        //        .RuleFor(r => r.Role, f => f.PickRandom<BreedRoleType>())
+        //        .Generate(f.Random.Int(1, 3)))  // Generates 1 to 3 roles
+        //    .RuleFor(b => b.Facts, f => new Faker<Fact>()
+        //        .RuleFor(fa => fa.Id, f => f.Random.Int(1, 1000))
+        //        .RuleFor(fa => fa.BreedId, f => f.Random.Int(1, 1000))
+        //        .RuleFor(fa => fa.Type, f => f.PickRandom<FactType>())
+        //        .RuleFor(fa => fa.Content, f => f.Lorem.Paragraph())
+        //        .Generate(f.Random.Int(1, 3)))  // Generates 1 to 3 facts
+        //    .RuleFor(b => b.NotableDogs, f => new Faker<NotableDog>()
+        //        .RuleFor(d => d.Id, f => f.Random.Int(1, 1000))
+        //        .RuleFor(d => d.BreedId, f => f.Random.Int(1, 1000))
+        //        .RuleFor(d => d.Name, f => f.Name.FirstName())
+        //        .RuleFor(d => d.KnownFor, f => f.Commerce.Product())
+        //        .RuleFor(d => d.Description, f => f.Lorem.Sentence())
+        //        .RuleFor(d => d.PrimaryImage, f => new ImageDetail
+        //        {
+        //            Folder = "images/dogs",
+        //            FileName = f.System.FileName("jpg"),
+        //            Attribution = f.Name.FullName()
+        //        })
+        //        .Generate(f.Random.Int(1, 2)))  // Generates 1 or 2 notable dogs
+        //    .RuleFor(b => b.NotableOwners, f => new Faker<NotableOwner>()
+        //        .RuleFor(o => o.Id, f => f.Random.Int(1, 1000))
+        //        .RuleFor(o => o.BreedId, f => f.Random.Int(1, 1000))
+        //        .RuleFor(o => o.Name, f => f.Name.FullName())
+        //        .RuleFor(o => o.KnownFor, f => f.Company.CatchPhrase())
+        //        .RuleFor(o => o.Description, f => f.Lorem.Sentence())
+        //        .RuleFor(o => o.PrimaryImage, f => new ImageDetail
+        //        {
+        //            Folder = "images/owners",
+        //            FileName = f.System.FileName("jpg"),
+        //            Attribution = f.Name.FullName()
+        //        })
+        //        .Generate(f.Random.Int(1, 2)))  // Generates 1 or 2 notable owners
+        //    .RuleFor(b => b.Questions, f => new Faker<Question>()
+        //        .RuleFor(q => q.Id, f => f.Random.Int(1, 1000))
+        //        .RuleFor(q => q.BreedId, f => f.Random.Int(1, 1000))
+        //        .RuleFor(q => q.QuestionType, f => f.PickRandom<QuestionType>())
+        //        .RuleFor(q => q.TextQuestionType, f => f.PickRandom<TextQuestionType>())
+        //        .RuleFor(q => q.Title, f => f.Lorem.Sentence())
+        //        .RuleFor(q => q.Text, f => f.Lorem.Paragraph())
+        //        .RuleFor(q => q.Difficulty, f => f.Random.Int(1, 5))
+        //        .RuleFor(q => q.Answer, f => new Answer
+        //        {
+        //            Id = f.Random.Int(1, 1000),
+        //            QuestionId = f.Random.Int(1, 1000),
+        //            Type = f.PickRandom<AnswerType>(),
+        //            Text = f.Lorem.Sentence(),
+        //        })
+        //        .Generate(f.Random.Int(1, 3)));
 
-        //// Adding items individually for AdditionalNames
-        //breed.AdditionalNames.Add(new BreedName { Name = "Lab" });
-        //breed.AdditionalNames.Add(new BreedName { Name = "Labrador" });
-
-        //// Adding items individually for AdditionalImages
-        //breed.AdditionalImages.Add(new ImageDetail { Folder = "Images/Breeds/Labrador", FileName = "labrador_1.jpg" });
-        //breed.AdditionalImages.Add(new ImageDetail { Folder = "Images/Breeds/Labrador", FileName = "labrador_2.jpg" });
-
-        //// Adding items individually for Varieties
-        //breed.Varieties.Add(new BreedVariety { Name = "American Labrador" });
-        //breed.Varieties.Add(new BreedVariety { Name = "English Labrador" });
-
-        //// Adding items individually for Roles
-        //breed.Roles.Add(BreedRoleType.Companion);
-        //breed.Roles.Add(BreedRoleType.Assistance);
-        //breed.Roles.Add(BreedRoleType.Therapy);
-
-        //// Adding items individually for Facts
-        //breed.Facts.Add(new BreedFact { Type = FactType.Historical, Text = "Originally bred in Newfoundland." });
-        //breed.Facts.Add(new BreedFact { Type = FactType.Behavioral, Text = "Known for its excellent retrieving skills." });
-
-        //// Adding items individually for TextQuestions
-        //breed.TextQuestions.Add(new Text
-        //{
-        //    Title = "Labrador Colors",
-        //    Text = "What colors are Labradors typically found in?",
-        //    Answer = new Answer { Type = AnswerType.MultipleChoice, MultipleChoiceAnswers = new List<string> { "Black", "Yellow", "Chocolate" } },
-        //    Type = TextQuestionType.SingleImageMultipleNames
-        //});
-        //breed.TextQuestions.Add(new Text
-        //{
-        //    Title = "Labrador Characteristics",
-        //    Text = "Are Labradors good family dogs?",
-        //    Answer = new Answer { Type = AnswerType.Boolean, BooleanAnswer = true },
-        //    Type = TextQuestionType.SingleImageMultipleNames
-        //});
-
-        //// Adding items individually for NotableOwners
-        //breed.NotableOwners.Add(new NotableOwner { Name = "John Smith", KnownFor = "Famous dog trainer", Description = "Specialist in Labrador training" });
-
-        //// Adding items individually for NotableDogs
-        //breed.NotableDogs.Add(new NotableDog { Name = "Buddy", KnownFor = "TV Star", Description = "Appeared in several TV shows" });
-
-        //var breed2 = new Breed
-        //{
-        //    Name = "German Shepherd",
-        //    Description = "A highly intelligent and versatile breed, known for its loyalty and courage.",
-        //    Origin = "Germany",
-        //    Difficulty = 3,
-        //    Image = new ImageDetail
-        //    {
-        //        Folder = "Images/Breeds/GermanShepherd",
-        //        FileName = "german_shepherd_primary.jpg",
-        //        Attribution = "Photo by John Doe",
-        //        License = "CC BY-SA 4.0"
-        //    }
-        //};
-
-        //// Adding items individually for AdditionalNames
-        //breed2.AdditionalNames.Add(new BreedName { Name = "GSD" });
-        //breed2.AdditionalNames.Add(new BreedName { Name = "Alsatian" });
-
-        //// Adding items individually for AdditionalImages
-        //breed2.AdditionalImages.Add(new ImageDetail { Folder = "Images/Breeds/GermanShepherd", FileName = "german_shepherd_1.jpg" });
-        //breed2.AdditionalImages.Add(new ImageDetail { Folder = "Images/Breeds/GermanShepherd", FileName = "german_shepherd_2.jpg" });
-
-        //// Adding items individually for Varieties
-        //breed2.Varieties.Add(new BreedVariety { Name = "Working Line" });
-        //breed2.Varieties.Add(new BreedVariety { Name = "Show Line" });
-
-        //// Adding items individually for Roles
-        //breed2.Roles.Add(BreedRoleType.Guarding);
-        //breed2.Roles.Add(BreedRoleType.Working);
-        //breed2.Roles.Add(BreedRoleType.Companion);
-
-        //// Adding items individually for Facts
-        //breed2.Facts.Add(new BreedFact { Type = FactType.Historical, Text = "Developed in Germany in the late 19th century." });
-        //breed2.Facts.Add(new BreedFact { Type = FactType.Behavioral, Text = "Known for its protective instincts and trainability." });
-
-        //// Adding items individually for TextQuestions
-        //breed2.TextQuestions.Add(new Text
-        //{
-        //    Title = "German Shepherd Colors",
-        //    Text = "What colors are German Shepherds typically found in?",
-        //    Answer = new Answer { Type = AnswerType.MultipleChoice, MultipleChoiceAnswers = new List<string> { "Black and Tan", "Sable", "All Black" } },
-        //    Type = TextQuestionType.SingleImageMultipleNames
-        //});
-        //breed2.TextQuestions.Add(new Text
-        //{
-        //    Title = "German Shepherd Roles",
-        //    Text = "Are German Shepherds commonly used as police dogs?",
-        //    Answer = new Answer { Type = AnswerType.Boolean, BooleanAnswer = true },
-        //    Type = TextQuestionType.SingleImageMultipleNames
-        //});
-
-        //// Adding items individually for NotableOwners
-        //breed2.NotableOwners.Add(new NotableOwner { Name = "Max von Stephanitz", KnownFor = "German dog breeder", Description = "Credited with the development of the breed" });
-
-        //// Adding items individually for NotableDogs
-        //breed2.NotableDogs.Add(new NotableDog { Name = "Rin Tin Tin", KnownFor = "Famous movie star", Description = "Appeared in numerous Hollywood films" });
-
-        //var breed3 = new Breed
-        //{
-        //    Name = "Golden Retriever",
-        //    Description = "A friendly, intelligent, and devoted breed, popular as a family and assistance dog.",
-        //    Origin = "Scotland",
-        //    Difficulty = 2,
-        //    Image = new ImageDetail
-        //    {
-        //        Folder = "Images/Breeds/GoldenRetriever",
-        //        FileName = "golden_retriever_primary.jpg",
-        //        Attribution = "Photo by Alex Smith",
-        //        License = "CC BY-SA 4.0"
-        //    }
-        //};
-
-        //// Adding items individually for AdditionalNames
-        //breed3.AdditionalNames.Add(new BreedName { Name = "Golden" });
-        //breed3.AdditionalNames.Add(new BreedName { Name = "Retriever" });
-
-        //// Adding items individually for AdditionalImages
-        //breed3.AdditionalImages.Add(new ImageDetail { Folder = "Images/Breeds/GoldenRetriever", FileName = "golden_retriever_1.jpg" });
-        //breed3.AdditionalImages.Add(new ImageDetail { Folder = "Images/Breeds/GoldenRetriever", FileName = "golden_retriever_2.jpg" });
-
-        //// Adding items individually for Varieties
-        //breed3.Varieties.Add(new BreedVariety { Name = "British Golden Retriever" });
-        //breed3.Varieties.Add(new BreedVariety { Name = "American Golden Retriever" });
-
-        //// Adding items individually for Roles
-        //breed3.Roles.Add(BreedRoleType.Assistance);
-        //breed3.Roles.Add(BreedRoleType.Companion);
-        //breed3.Roles.Add(BreedRoleType.Therapy);
-
-        //// Adding items individually for Facts
-        //breed3.Facts.Add(new BreedFact { Type = FactType.Historical, Text = "Originally bred in Scotland for hunting." });
-        //breed3.Facts.Add(new BreedFact { Type = FactType.Behavioral, Text = "Known for its gentle temperament and love of water." });
-
-        //// Adding items individually for TextQuestions
-        //breed3.TextQuestions.Add(new Text
-        //{
-        //    Title = "Golden Retriever Coat",
-        //    Text = "What type of coat do Golden Retrievers typically have?",
-        //    Answer = new Answer { Type = AnswerType.MultipleChoice, MultipleChoiceAnswers = new List<string> { "Smooth", "Curly", "Wavy" } },
-        //    Type = TextQuestionType.SingleImageMultipleNames
-        //});
-        //breed3.TextQuestions.Add(new Text
-        //{
-        //    Title = "Golden Retriever Personality",
-        //    Text = "Are Golden Retrievers generally friendly towards strangers?",
-        //    Answer = new Answer { Type = AnswerType.Boolean, BooleanAnswer = true },
-        //    Type = TextQuestionType.SingleImageMultipleNames
-        //});
-
-        //// Adding items individually for NotableOwners
-        //breed3.NotableOwners.Add(new NotableOwner { Name = "Geraldine Rockefeller Dodge", KnownFor = "Philanthropist", Description = "One of the early breeders of Golden Retrievers in the United States" });
-
-        //// Adding items individually for NotableDogs
-        //breed3.NotableDogs.Add(new NotableDog { Name = "Liberty", KnownFor = "Presidential pet", Description = "Pet of U.S. President Gerald Ford" });
-
-        //var breed4 = new Breed
-        //{
-        //    Name = "Bulldog",
-        //    Description = "A muscular and loyal breed with a distinct wrinkled face and pushed-in nose, known for its gentle disposition.",
-        //    Origin = "England",
-        //    Difficulty = 3,
-        //    Image = new ImageDetail
-        //    {
-        //        Folder = "Images/Breeds/Bulldog",
-        //        FileName = "bulldog_primary.jpg",
-        //        Attribution = "Photo by Sarah Johnson",
-        //        License = "CC BY-SA 4.0"
-        //    }
-        //};
-
-        //// Adding items individually for AdditionalNames
-        //breed4.AdditionalNames.Add(new BreedName { Name = "British Bulldog" });
-        //breed4.AdditionalNames.Add(new BreedName { Name = "English Bulldog" });
-
-        //// Adding items individually for AdditionalImages
-        //breed4.AdditionalImages.Add(new ImageDetail { Folder = "Images/Breeds/Bulldog", FileName = "bulldog_1.jpg" });
-        //breed4.AdditionalImages.Add(new ImageDetail { Folder = "Images/Breeds/Bulldog", FileName = "bulldog_2.jpg" });
-
-        //// Adding items individually for Varieties
-        //breed4.Varieties.Add(new BreedVariety { Name = "Miniature Bulldog" });
-        //breed4.Varieties.Add(new BreedVariety { Name = "Standard Bulldog" });
-
-        //// Adding items individually for Roles
-        //breed4.Roles.Add(BreedRoleType.Companion);
-        //breed4.Roles.Add(BreedRoleType.Guarding);
-
-        //// Adding items individually for Facts
-        //breed4.Facts.Add(new BreedFact { Type = FactType.Historical, Text = "Originally bred for bull-baiting in England." });
-        //breed4.Facts.Add(new BreedFact { Type = FactType.Behavioral, Text = "Known for being affectionate and dependable with a gentle nature." });
-
-        //// Adding items individually for TextQuestions
-        //breed4.TextQuestions.Add(new Text
-        //{
-        //    Title = "Bulldog Physical Traits",
-        //    Text = "What characteristic physical trait is most associated with Bulldogs?",
-        //    Answer = new Answer { Type = AnswerType.MultipleChoice, MultipleChoiceAnswers = new List<string> { "Wrinkled face", "Long legs", "Pointed ears" } },
-        //    Type = TextQuestionType.SingleImageMultipleNames
-        //});
-        //breed4.TextQuestions.Add(new Text
-        //{
-        //    Title = "Bulldog Temperament",
-        //    Text = "Are Bulldogs known to be good family pets?",
-        //    Answer = new Answer { Type = AnswerType.Boolean, BooleanAnswer = true },
-        //    Type = TextQuestionType.SingleImageMultipleNames
-        //});
-
-        //// Adding items individually for NotableOwners
-        //breed4.NotableOwners.Add(new NotableOwner { Name = "Winston Churchill", KnownFor = "British Prime Minister", Description = "Known for his fondness of Bulldogs" });
-
-        //// Adding items individually for NotableDogs
-        //breed4.NotableDogs.Add(new NotableDog { Name = "Handsome Dan", KnownFor = "Yale University Mascot", Description = "The official live mascot of Yale since the 1880s" });
-
-        //// Add the breed to the database context
-        //context.Set<Breed>().Add(breed4);
-        //context.SaveChanges();
-
-        //// Add the breed to the database context
-        //context.Set<Breed>().Add(breed3);
-        //context.SaveChanges();
-
-        //// Add the breed to the database context
-        //context.Set<Breed>().Add(breed2);
-        //context.SaveChanges();
-
-        //// Add the breed to the database context
-        //context.Set<Breed>().Add(breed);
+        //context.Set<Breed>().Add(breedFaker.Generate());
         //context.SaveChanges();
     }
 }

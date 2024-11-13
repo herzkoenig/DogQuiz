@@ -21,4 +21,5 @@ public class Breed : AuditableEntity
     public ICollection<NotableDog> NotableDogs { get; } = new List<NotableDog>();
     public ICollection<NotableOwner> NotableOwners { get; } = new List<NotableOwner>();
     public ICollection<Tag> BreedTags { get; set; } = new List<Tag>();
+    // MIXED BREEDS!!
 }

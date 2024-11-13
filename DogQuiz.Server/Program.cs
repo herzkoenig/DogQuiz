@@ -17,6 +17,11 @@ builder.Services.AddScoped<IBreedService, BreedService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+
 builder.Services.AddAuthorization();
 
 
@@ -42,16 +47,28 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-/* DIRTY HACK for early stages of development!
-   Using this to reset the database on startup and seed initial data */
+
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    context.Database.EnsureDeleted();
-    context.Database.EnsureCreated();
+    var services = scope.ServiceProvider;
 
-    var dataInitializer = new CreateDummyData(context);
-    dataInitializer.CreateData();
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    if (app.Environment.IsDevelopment())
+    {
+        /* DIRTY HACK for early stages of development!
+           Using this to reset the database on startup and seed initial data */
+        context.Database.EnsureDeleted();
+        context.Database.EnsureCreated();
+
+        var dataInitializer = new CreateDummyData(context);
+        dataInitializer.CreateData();
+    }
+    else
+    {
+        context.Database.Migrate();
+    }
+
+    await DbInitializer.SeedAdminUserAndRole(services, builder.Configuration);
 }
 
 // Middleware configuration

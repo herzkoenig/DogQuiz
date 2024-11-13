@@ -1,6 +1,6 @@
 ﻿using DogQuiz.Server.Models.Auth;
 using DogQuiz.Server.Models.Entities;
-using DogQuiz.Server.Models.Enums;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,12 +41,6 @@ public class ApplicationDbContext : IdentityDbContext<User>
         {
             entity.Property(bf => bf.BreedId).IsRequired(); // Required: BreedFact.BreedId
             entity.Property(bf => bf.Content).IsRequired(); // Required: BreedFact.Content
-        });
-
-        // MODEL: ImageDetail
-        modelBuilder.Entity<ImageDetail>(entity =>
-        {
-            entity.HasKey(i => new { i.Folder, i.FileName }); // Composite key for ImageDetail
         });
     }
 
