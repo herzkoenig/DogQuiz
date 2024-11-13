@@ -1,4 +1,4 @@
-﻿using DogQuiz.Server.Models.Dtos;
+﻿using DogQuiz.Server.Dtos;
 
 namespace DogQuiz.Server.Services.Interfaces;
 

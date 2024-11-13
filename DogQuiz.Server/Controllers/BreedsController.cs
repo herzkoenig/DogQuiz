@@ -1,6 +1,6 @@
 ﻿using DogQuiz.Server.Data;
+using DogQuiz.Server.Dtos;
 using DogQuiz.Server.Models;
-using DogQuiz.Server.Models.Dtos;
 using DogQuiz.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

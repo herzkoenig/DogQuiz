@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DogQuiz.Server.Models.Dtos;
+namespace DogQuiz.Server.Dtos;
 
 public class QuestionDto
 {

@@ -1,6 +1,6 @@
 ﻿using DogQuiz.Server.Models.Auth;
 
-namespace DogQuiz.Server.Models.Auditing;
+namespace DogQuiz.Server.Models.Base;
 
 public abstract class AuditableEntityWithSoftDelete : AuditableEntity
 {

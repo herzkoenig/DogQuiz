@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
 
 namespace DogQuiz.Server.Data;
 
@@ -13,11 +12,21 @@ public static class MigrationExtensions
 
     */
 
-    //public static void ApplyMigrations(this IApplicationBuilder app)
-    //{
-    //    using IServiceScope scope = app.ApplicationServices.CreateScope();
-    //    using ApplicationDbContext context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    public static void ApplyMigrations(this IApplicationBuilder app)
+    {
+        using var scope = app.ApplicationServices.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-    //    context.Database.Migrate();
-    //}
+        try
+        {
+            context.Database.Migrate();
+            Console.WriteLine("Database migrations applied successfully.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error applying database migrations: {ex.Message}");
+            // Log the error, alert monitoring services, etc.
+        }
+    }
+
 }

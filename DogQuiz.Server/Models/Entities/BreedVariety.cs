@@ -1,4 +1,4 @@
-﻿using DogQuiz.Server.Models.Auditing;
+﻿using DogQuiz.Server.Models.Base;
 
 namespace DogQuiz.Server.Models.Entities;
 

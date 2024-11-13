@@ -1,4 +1,4 @@
-﻿using DogQuiz.Server.Models.Auditing;
+﻿using DogQuiz.Server.Models.Base;
 using DogQuiz.Server.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 

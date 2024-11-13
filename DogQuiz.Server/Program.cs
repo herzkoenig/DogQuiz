@@ -1,43 +1,30 @@
 using DogQuiz.Server.Data;
-using DogQuiz.Server.Models;
 using DogQuiz.Server.Models.Auth;
 using DogQuiz.Server.Services;
 using DogQuiz.Server.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-using System.Text.RegularExpressions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IBreedService, BreedService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+
+// Configure Identity with User and Role, as well as token providers
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-
 builder.Services.AddAuthorization();
 
-
-// Configures ASP.NET Identity's cookie-based authentication scheme for user sessions
-//builder.Services.AddAuthentication().AddCookie(IdentityConstants.ApplicationScheme);
-
-/* Sets up Identity with 'User' model and 'ApplicationDbContext', creating tables for user authentication. */
-//builder.Services.AddIdentityCore<User>()
-//    .AddEntityFrameworkStores<ApplicationDbContext>()
-//    .AddApiEndpoints();
-
-// Configures a generic cookie-based authentication scheme (not tied to ASP.NET Identity)
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+// TODO: Make it a non-generic IEmailSender; see why the Exception was thrown!
+builder.Services.AddSingleton<IEmailSender<User>, DogQuiz.Server.Services.NoOpEmailSender>();
+builder.Services.AddScoped<IBreedService, BreedService>();
 
 var app = builder.Build();
 
@@ -47,31 +34,30 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-
     var context = services.GetRequiredService<ApplicationDbContext>();
+
     if (app.Environment.IsDevelopment())
     {
-        /* DIRTY HACK for early stages of development!
-           Using this to reset the database on startup and seed initial data */
+        // Reset database on startup in development only (use for beginning stages of development)
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
 
+        // Seed initial data for development
         var dataInitializer = new CreateDummyData(context);
         dataInitializer.CreateData();
     }
     else
     {
-        context.Database.Migrate();
+        app.ApplyMigrations();
     }
 
+    // Seed admin user and role regardless of environment
     await DbInitializer.SeedAdminUserAndRole(services, builder.Configuration);
 }
 
-// Middleware configuration
 app.UseHttpsRedirection();
 app.UseStaticFiles(new StaticFileOptions
 {
@@ -84,19 +70,17 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
-    // Uncomment if migration application is needed at runtime
-    // app.ApplyMigrations();
 }
 
-// Authentication and Authorization; use after app.UseRouting and before upp.UseEndpoints
+// Routing setup (must be before Authentication and Authorization)
+app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Endpoint mapping
-//app.MapIdentityApi<User>(); // Maps the Endpoints created through .AddEntityFrameworkStores<ApplicationDbContext>()
-app.MapControllers();
+app.MapIdentityApi<User>();
 
+app.MapControllers();
 app.MapFallbackToFile("/index.html");
 
 app.Run();
