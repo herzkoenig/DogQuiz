@@ -1,7 +1,6 @@
-﻿using DogQuiz.Server.Models.Base;
-using DogQuiz.Server.Models.Auth;
+﻿using DogQuiz.Server.Models.Bases;
 
-namespace DogQuiz.Server.Models.Entities;
+namespace DogQuiz.Server.Models.Entities.General;
 
 public class ImageDetail : AuditableEntity
 {

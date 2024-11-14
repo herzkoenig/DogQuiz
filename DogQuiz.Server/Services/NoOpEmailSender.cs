@@ -1,4 +1,4 @@
-﻿using DogQuiz.Server.Models.Auth;
+﻿using DogQuiz.Server.Models.Entities.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Threading.Tasks;

@@ -1,6 +1,6 @@
-﻿using DogQuiz.Server.Models.Auth;
+﻿using DogQuiz.Server.Models.Entities.Auth;
 
-namespace DogQuiz.Server.Models.Base;
+namespace DogQuiz.Server.Models.Bases;
 
 public abstract class AuditableEntity
 {

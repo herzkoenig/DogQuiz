@@ -81,12 +81,12 @@ public class CreateDummyData(DbContext context)
         //    .RuleFor(b => b.Questions, f => new Faker<Question>()
         //        .RuleFor(q => q.Id, f => f.Random.Int(1, 1000))
         //        .RuleFor(q => q.BreedId, f => f.Random.Int(1, 1000))
-        //        .RuleFor(q => q.QuestionType, f => f.PickRandom<QuestionType>())
-        //        .RuleFor(q => q.TextQuestionType, f => f.PickRandom<TextQuestionType>())
+        //        .RuleFor(q => q.QuestionTextType, f => f.PickRandom<QuestionTextType>())
+        //        .RuleFor(q => q.QuestionTextType, f => f.PickRandom<QuestionTextType>())
         //        .RuleFor(q => q.Title, f => f.Lorem.Sentence())
         //        .RuleFor(q => q.Text, f => f.Lorem.Paragraph())
         //        .RuleFor(q => q.Difficulty, f => f.Random.Int(1, 5))
-        //        .RuleFor(q => q.Answer, f => new Answer
+        //        .RuleFor(q => q.TextAnswer, f => new TextAnswer
         //        {
         //            Id = f.Random.Int(1, 1000),
         //            QuestionId = f.Random.Int(1, 1000),

@@ -1,10 +1,10 @@
-﻿using DogQuiz.Server.Models.Auth;
+﻿using DogQuiz.Server.Models.Entities.Auth;
 
-namespace DogQuiz.Server.Models.Base;
+namespace DogQuiz.Server.Models.Bases;
 
 public abstract class AuditableEntityWithSoftDelete : AuditableEntity
 {
     public bool IsDeleted { get; set; }
-    public DateTime? DeletedOn { get; set; }
+    public DateTime? DateDeleted { get; set; }
     public User? DeletedBy { get; set; }
 }

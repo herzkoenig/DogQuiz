@@ -1,10 +1,10 @@
-﻿using DogQuiz.Server.Models.Base;
+﻿using DogQuiz.Server.Models.Bases;
+using DogQuiz.Server.Models.Entities.Breeds;
 using DogQuiz.Server.Models.Enums;
-using System.ComponentModel.DataAnnotations;
 
-namespace DogQuiz.Server.Models.Entities;
+namespace DogQuiz.Server.Models.Entities.Questionnaire;
 
-public class Fact : AuditableEntity
+public class Fact : AuditableEntityWithSoftDelete
 {
     public int Id { get; set; }
     public int? BreedId { get; set; }

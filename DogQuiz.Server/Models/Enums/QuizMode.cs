@@ -9,7 +9,7 @@ public enum QuizMode
 
 /*
     /// <summary>
-    /// Answer as many questions as possible within a time limit.
+    /// TextAnswer as many questions as possible within a time limit.
     /// </summary>
     TimedRush,
 

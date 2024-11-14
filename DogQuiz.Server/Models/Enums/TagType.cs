@@ -2,4 +2,6 @@
 
 public enum TagType
 {
+    General,
+    Breed
 }

@@ -1,8 +1,9 @@
-﻿using DogQuiz.Server.Models.Base;
+﻿using DogQuiz.Server.Models.Bases;
+using DogQuiz.Server.Models.Entities.General;
 
-namespace DogQuiz.Server.Models.Entities;
+namespace DogQuiz.Server.Models.Entities.Breeds;
 
-public class NotableOwner : AuditableEntity
+public class NotableOwner : AuditableEntityWithSoftDelete
 {
     public int Id { get; set; }
     public int BreedId { get; set; }

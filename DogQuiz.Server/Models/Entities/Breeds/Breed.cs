@@ -1,10 +1,10 @@
-﻿using DogQuiz.Server.Models.Base;
-using DogQuiz.Server.Models.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using DogQuiz.Server.Models.Bases;
+using DogQuiz.Server.Models.Entities.General;
+using DogQuiz.Server.Models.Entities.Questionnaire;
 
-namespace DogQuiz.Server.Models.Entities;
+namespace DogQuiz.Server.Models.Entities.Breeds;
 
-public class Breed : AuditableEntity
+public class Breed : AuditableEntityWithSoftDelete
 {
     public int Id { get; set; }
     public required string Name { get; set; }
@@ -12,6 +12,7 @@ public class Breed : AuditableEntity
     public ImageDetail? Image { get; set; }
     public ICollection<ImageDetail> AdditionalImages { get; } = new List<ImageDetail>();
     public ICollection<BreedVariety> Varieties { get; } = new List<BreedVariety>();
+    public ICollection<BreedMix> BreedMixes { get; } = new List<BreedMix>();
     public string? Description { get; set; }
     public string? Origin { get; set; }
     public int? Difficulty { get; set; }
@@ -20,6 +21,5 @@ public class Breed : AuditableEntity
     public ICollection<Fact> Facts { get; } = new List<Fact>();
     public ICollection<NotableDog> NotableDogs { get; } = new List<NotableDog>();
     public ICollection<NotableOwner> NotableOwners { get; } = new List<NotableOwner>();
-    public ICollection<Tag> BreedTags { get; set; } = new List<Tag>();
-    // MIXED BREEDS!!
+    public ICollection<Tag> BreedTags { get; } = new List<Tag>();
 }

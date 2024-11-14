@@ -1,6 +1,6 @@
 ﻿namespace DogQuiz.Server.Models.Enums;
 
-public enum ImageQuestionType
+public enum QuestionImageType
 {
     SingleImageMultipleNames,
     MultipleImagesSingleName,

@@ -1,5 +1,5 @@
 using DogQuiz.Server.Data;
-using DogQuiz.Server.Models.Auth;
+using DogQuiz.Server.Models.Entities.Auth;
 using DogQuiz.Server.Services;
 using DogQuiz.Server.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
