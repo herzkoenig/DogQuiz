@@ -1,8 +1,7 @@
-﻿namespace DogQuiz.Server.Models.Enums
+﻿namespace DogQuiz.Server.Models.Enums;
+
+public enum QuestionType
 {
-    public enum QuestionType
-    {
-        Text,
-        Image
-    }
+    Text,
+    Image
 }

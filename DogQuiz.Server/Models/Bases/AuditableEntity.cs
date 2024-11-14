@@ -8,6 +8,4 @@ public abstract class AuditableEntity
     public User? CreatedBy { get; set; }
     public DateTime? DateUpdated { get; set; }
     public User? UpdatedBy { get; set; }
-    //public string? CreatedById { get; set; }
-    //public string? UpdatedById { get; set; }
 }

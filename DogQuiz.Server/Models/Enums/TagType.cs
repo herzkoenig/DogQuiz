@@ -3,5 +3,7 @@
 public enum TagType
 {
     General,
-    Breed
+    Breed,
+    Administrative,
+    Critical,
 }

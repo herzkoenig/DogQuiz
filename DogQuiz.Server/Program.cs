@@ -1,10 +1,13 @@
+using DogQuiz.Server.Configuration;
 using DogQuiz.Server.Data;
 using DogQuiz.Server.Models.Entities.Auth;
 using DogQuiz.Server.Services;
 using DogQuiz.Server.Services.Interfaces;
+using Duende.IdentityServer.EntityFramework.DbContexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,15 +18,28 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
-// Configure Identity with User and Role, as well as token providers
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+var migrationsAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
+
+builder.Services.AddIdentityServer()
+    .AddConfigurationStore(options =>
+    {
+        options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+            sql => sql.MigrationsAssembly(migrationsAssembly));
+    })
+    .AddOperationalStore(options =>
+    {
+        options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+            sql => sql.MigrationsAssembly(migrationsAssembly));
+    })
+    .AddAspNetIdentity<User>();
+
 builder.Services.AddAuthorization();
 
-// TODO: Make it a non-generic IEmailSender; see why the Exception was thrown!
-builder.Services.AddSingleton<IEmailSender<User>, DogQuiz.Server.Services.NoOpEmailSender>();
+builder.Services.AddSingleton<IEmailSender<User>, ConsoleEmailSender>();
 builder.Services.AddScoped<IBreedService, BreedService>();
 
 var app = builder.Build();
@@ -37,22 +53,27 @@ if (!app.Environment.IsDevelopment())
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<ApplicationDbContext>();
 
+    // Automatically apply migrations for ApplicationDbContext
+    var appDbContext = services.GetRequiredService<ApplicationDbContext>();
+
+
+
+    // Seed initial data for ApplicationDbContext in development
     if (app.Environment.IsDevelopment())
     {
-        // Reset database on startup in development only (use for beginning stages of development)
-        context.Database.EnsureDeleted();
-        context.Database.EnsureCreated();
+        //appDbContext.Database.EnsureDeleted();
+        //appDbContext.Database.EnsureCreated();
 
-        // Seed initial data for development
-        var dataInitializer = new CreateDummyData(context);
+        // Seed initial data
+        var dataInitializer = new CreateDummyData(appDbContext);
         dataInitializer.CreateData();
     }
-    else
-    {
-        app.ApplyMigrations();
-    }
+
+    var configDbContext = services.GetRequiredService<ConfigurationDbContext>();
+
+    // Seed IdentityServer configuration
+    IdentityServerSeeder.SeedIdentityServerConfig(configDbContext);
 
     // Seed admin user and role regardless of environment
     await DbInitializer.SeedAdminUserAndRole(services, builder.Configuration);
@@ -79,7 +100,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapIdentityApi<User>();
-
 app.MapControllers();
 app.MapFallbackToFile("/index.html");
 

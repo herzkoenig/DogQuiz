@@ -6,5 +6,4 @@ public enum AnswerType
     TrueFalse,
     SingleChoice,
     MultipleChoice,
-    List,
 }

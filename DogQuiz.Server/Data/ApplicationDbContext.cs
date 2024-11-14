@@ -43,11 +43,11 @@ public class ApplicationDbContext : IdentityDbContext<User>
         });
 
         // MODEL: Fact
-        modelBuilder.Entity<Fact>(entity =>
-        {
-            entity.Property(bf => bf.BreedId).IsRequired(); // Required: BreedFact.BreedId
-            entity.Property(bf => bf.Content).IsRequired(); // Required: BreedFact.Content
-        });
+        //modelBuilder.Entity<Fact>(entity =>
+        //{
+        //    entity.Property(bf => bf.Breed).IsRequired(); // Required: BreedFact.BreedId
+        //    entity.Property(bf => bf.Content).IsRequired(); // Required: BreedFact.Content
+        //});
 
 
         modelBuilder.Entity<Question>()

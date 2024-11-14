@@ -13,6 +13,4 @@ public class Question : AuditableEntityWithSoftDelete
     public int? Difficulty { get; set; }
     public Breed? Breed { get; set; }
     public required Answer Answer { get; set; }
-    //public int? BreedId { get; set; }
-    //public required int AnswerId { get; set; }
 }
