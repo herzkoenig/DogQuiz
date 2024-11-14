@@ -10,6 +10,6 @@ public class QuestionImage : Question
     {
         Type = QuestionType.Image;
     }
-    public QuestionImageType ImageQuestionType { get; set; } = QuestionImageType.StaticQuestion;
-    public required ImageDetail Image { get; set; }
+    public QuestionImageType? ImageQuestionType { get; set; } = QuestionImageType.StaticQuestion;
+    public ImageDetail? Image { get; set; }
 }

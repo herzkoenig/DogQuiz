@@ -2,11 +2,11 @@
 using DogQuiz.Server.Models.Enums;
 
 namespace DogQuiz.Server.Models.Bases;
-public abstract class Answer : AuditableEntityWithSoftDelete
+public class Answer : AuditableEntityWithSoftDelete
 {
     public int Id { get; set; }
-    public int QuestionId { get; set; }
     public AnswerType Type { get; set; }
-    public Question Question { get; set; }
+    public required Question Question { get; set; }
+    //public required int QuestionId { get; set; }
 
 }

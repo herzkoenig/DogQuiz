@@ -1,4 +1,5 @@
 ﻿using DogQuiz.Server.Models.Bases;
+using DogQuiz.Server.Models.Entities.Breeds;
 
 namespace DogQuiz.Server.Models.Entities.General;
 

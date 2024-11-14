@@ -6,7 +6,8 @@ namespace DogQuiz.Server.Models.Entities.Breeds
     public class BreedRole : AuditableEntityWithSoftDelete
     {
         public int Id { get; set; }
-        public int BreedId { get; set; }
-        public BreedRoleType Role { get; set; }
+        public required BreedRoleType Role { get; set; }
+        public required Breed Breed { get; set; }
+        //public int BreedId { get; set; }
     }
 }

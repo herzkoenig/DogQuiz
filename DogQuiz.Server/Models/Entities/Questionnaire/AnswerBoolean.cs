@@ -5,9 +5,9 @@ namespace DogQuiz.Server.Models.Entities.Questionnaire;
 
 public class AnswerBoolean : Answer
 {
-    public AnswerBoolean()
-    {
-        Type = AnswerType.Boolean;
-    }
-    public required bool Value { get; set; }
+    //public AnswerBoolean()
+    //{
+    //    Type = AnswerType.TrueFalse;
+    //}
+    public bool? Bool { get; set; }
 }

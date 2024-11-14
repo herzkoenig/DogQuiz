@@ -9,5 +9,5 @@ public class QuestionText : Question
     {
         Type = QuestionType.Text;
     }
-    public required QuestionTextType TextQuestionType { get; set; }
+    public QuestionTextType? TextQuestionType { get; set; }
 }

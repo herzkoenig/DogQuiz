@@ -3,8 +3,8 @@
 public enum AnswerType
 {
     Text,
+    TrueFalse,
     SingleChoice,
     MultipleChoice,
-    Boolean,
     List,
 }

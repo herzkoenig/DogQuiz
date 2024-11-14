@@ -49,11 +49,22 @@ public class ApplicationDbContext : IdentityDbContext<User>
             entity.Property(bf => bf.Content).IsRequired(); // Required: BreedFact.Content
         });
 
-        // MODEL: TextAnswer
-        modelBuilder.Entity<AnswerBoolean>(entity =>
-        {
-            entity.Property(a => a.QuestionId).IsRequired(); // Required: TextAnswer.QuestionId
-        });
+
+        modelBuilder.Entity<Question>()
+        .HasOne(q => q.Answer)
+        .WithOne(a => a.Question)
+        .HasForeignKey<Answer>(a => a.Id)
+        .OnDelete(DeleteBehavior.Cascade);
+
+
+        modelBuilder.Entity<Answer>()
+            .HasDiscriminator<string>("AnswerType")
+            .HasValue<AnswerBoolean>("TrueFalse")
+            .HasValue<AnswerText>("Test");
+
+        //modelBuilder.Entity<BreedMix>()
+        //    .HasMany(bm => bm.Breeds)
+        //    .WithMany();
 
         modelBuilder.Entity<BreedMix>()
                .HasMany(bm => bm.Breeds)
@@ -114,7 +125,7 @@ public class ApplicationDbContext : IdentityDbContext<User>
         base.OnConfiguring(optionsBuilder);
 
         //// Hacky logging to Console!
-        //optionsBuilder.LogTo(Console.WriteLine);
+        optionsBuilder.LogTo(Console.WriteLine);
 
     }
 }
