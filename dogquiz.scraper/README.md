@@ -1,3 +1,0 @@
-# dogquiz.scraper
-
-

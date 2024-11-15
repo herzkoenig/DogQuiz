@@ -1,15 +1,12 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35424.110
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogQuiz.Server", "DogQuiz.Server\DogQuiz.Server.csproj", "{68BA8703-2DBE-4F2C-80D9-DB836C5C7C86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.AppHost", "DogQuiz.AppHost\DogQuiz.AppHost.csproj", "{F24ED298-5214-4E7A-897A-05FA2F858EB1}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "dogquiz.client", "dogquiz.client\dogquiz.client.esproj", "{68693257-8A05-4AA6-8E65-D5EA94B51343}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.ServiceDefaults", "DogQuiz.ServiceDefaults\DogQuiz.ServiceDefaults.csproj", "{D1C02F79-B6AB-4A14-B0B9-F64E5E03F4E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Tests", "DogQuiz.Tests\DogQuiz.Tests.csproj", "{8D3988C2-1242-41A1-899F-58BD85D93C18}"
-EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "dogquiz.scraper", "dogquiz.scraper\dogquiz.scraper.njsproj", "{D1481057-DAA8-4192-88C0-134D219164D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.API", "DogQuiz.API\DogQuiz.API.csproj", "{197793F9-34B2-4930-B8FD-D81B11B5ECDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,29 +14,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{68BA8703-2DBE-4F2C-80D9-DB836C5C7C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68BA8703-2DBE-4F2C-80D9-DB836C5C7C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68BA8703-2DBE-4F2C-80D9-DB836C5C7C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68BA8703-2DBE-4F2C-80D9-DB836C5C7C86}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68693257-8A05-4AA6-8E65-D5EA94B51343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68693257-8A05-4AA6-8E65-D5EA94B51343}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68693257-8A05-4AA6-8E65-D5EA94B51343}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{68693257-8A05-4AA6-8E65-D5EA94B51343}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68693257-8A05-4AA6-8E65-D5EA94B51343}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68693257-8A05-4AA6-8E65-D5EA94B51343}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{8D3988C2-1242-41A1-899F-58BD85D93C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D3988C2-1242-41A1-899F-58BD85D93C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D3988C2-1242-41A1-899F-58BD85D93C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D3988C2-1242-41A1-899F-58BD85D93C18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1481057-DAA8-4192-88C0-134D219164D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1481057-DAA8-4192-88C0-134D219164D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1481057-DAA8-4192-88C0-134D219164D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1481057-DAA8-4192-88C0-134D219164D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F24ED298-5214-4E7A-897A-05FA2F858EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F24ED298-5214-4E7A-897A-05FA2F858EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F24ED298-5214-4E7A-897A-05FA2F858EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F24ED298-5214-4E7A-897A-05FA2F858EB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1C02F79-B6AB-4A14-B0B9-F64E5E03F4E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1C02F79-B6AB-4A14-B0B9-F64E5E03F4E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1C02F79-B6AB-4A14-B0B9-F64E5E03F4E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1C02F79-B6AB-4A14-B0B9-F64E5E03F4E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{197793F9-34B2-4930-B8FD-D81B11B5ECDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{197793F9-34B2-4930-B8FD-D81B11B5ECDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{197793F9-34B2-4930-B8FD-D81B11B5ECDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{197793F9-34B2-4930-B8FD-D81B11B5ECDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {922862FB-32F1-4215-BD86-FBCE2C197C03}
 	EndGlobalSection
 EndGlobal
