@@ -1,7 +1,7 @@
-﻿using DogQuiz.API.Data;
-using DogQuiz.API.Dtos;
+﻿using DogQuiz.Data.Dtos;
 using DogQuiz.API.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using DogQuiz.Data;
 
 namespace DogQuiz.API.Services;
 

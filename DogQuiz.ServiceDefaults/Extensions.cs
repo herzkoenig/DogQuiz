@@ -3,19 +3,15 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.ServiceDiscovery;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 
 namespace Microsoft.Extensions.Hosting;
 
-// Adds common .NET Aspire services: service discovery, resilience, health checks, and OpenTelemetry.
-// This project should be referenced by each service project in your solution.
-// To learn more about using this project, see https://aka.ms/dotnet/aspire/service-defaults
 public static class Extensions
 {
-    public static TBuilder AddServiceDefaults<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
+    public static IHostApplicationBuilder AddServiceDefaults(this IHostApplicationBuilder builder)
     {
         builder.ConfigureOpenTelemetry();
 
@@ -32,16 +28,10 @@ public static class Extensions
             http.AddServiceDiscovery();
         });
 
-        // Uncomment the following to restrict the allowed schemes for service discovery.
-        // builder.Services.Configure<ServiceDiscoveryOptions>(options =>
-        // {
-        //     options.AllowedSchemes = ["https"];
-        // });
-
         return builder;
     }
 
-    public static TBuilder ConfigureOpenTelemetry<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
+    public static IHostApplicationBuilder ConfigureOpenTelemetry(this IHostApplicationBuilder builder)
     {
         builder.Logging.AddOpenTelemetry(logging =>
         {
@@ -53,16 +43,14 @@ public static class Extensions
             .WithMetrics(metrics =>
             {
                 metrics.AddAspNetCoreInstrumentation()
-                    .AddHttpClientInstrumentation()
-                    .AddRuntimeInstrumentation();
+                       .AddHttpClientInstrumentation()
+                       .AddRuntimeInstrumentation();
             })
             .WithTracing(tracing =>
             {
                 tracing.AddSource(builder.Environment.ApplicationName)
-                    .AddAspNetCoreInstrumentation()
-                    // Uncomment the following line to enable gRPC instrumentation (requires the OpenTelemetry.Instrumentation.GrpcNetClient package)
-                    //.AddGrpcClientInstrumentation()
-                    .AddHttpClientInstrumentation();
+                       .AddAspNetCoreInstrumentation()
+                       .AddHttpClientInstrumentation();
             });
 
         builder.AddOpenTelemetryExporters();
@@ -70,7 +58,7 @@ public static class Extensions
         return builder;
     }
 
-    private static TBuilder AddOpenTelemetryExporters<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
+    private static IHostApplicationBuilder AddOpenTelemetryExporters(this IHostApplicationBuilder builder)
     {
         var useOtlpExporter = !string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
 
@@ -79,17 +67,10 @@ public static class Extensions
             builder.Services.AddOpenTelemetry().UseOtlpExporter();
         }
 
-        // Uncomment the following lines to enable the Azure Monitor exporter (requires the Azure.Monitor.OpenTelemetry.AspNetCore package)
-        //if (!string.IsNullOrEmpty(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
-        //{
-        //    builder.Services.AddOpenTelemetry()
-        //       .UseAzureMonitor();
-        //}
-
         return builder;
     }
 
-    public static TBuilder AddDefaultHealthChecks<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
+    public static IHostApplicationBuilder AddDefaultHealthChecks(this IHostApplicationBuilder builder)
     {
         builder.Services.AddHealthChecks()
             // Add a default liveness check to ensure app is responsive

@@ -1,9 +1,19 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddProject<Projects.DogQuiz_API>("dogquiz-api");
+var sqlserver = builder.AddSqlServer("sqlserver")
+    .WithLifetime(ContainerLifetime.Persistent);
 
-//builder.AddKeycloakContainer("Keycloak");
+var sqldb = sqlserver.AddDatabase("sqldb");
 
-//var db = builder.AddSqlServer("sql").AddDatabase("db");
+var migrationService = builder.AddProject<Projects.DogQuiz_MigrationService>("migration")
+    .WithReference(sqldb)
+    .WaitFor(sqldb);
+
+builder.AddProject<Projects.DogQuiz_API>("api")
+    .WithReference(sqldb)
+    .WaitForCompletion(migrationService);
 
 builder.Build().Run();

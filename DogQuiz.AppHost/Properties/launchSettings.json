@@ -5,25 +5,67 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:17153;http://localhost:15023",
+      "applicationUrl": "https://localhost:17119;http://localhost:15061",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DOTNET_ENVIRONMENT": "Development",
-        "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "https://localhost:21218",
-        "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22000"
+        "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "https://localhost:21172",
+        "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22106"
       }
     },
     "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:15023",
+      "applicationUrl": "http://localhost:15888",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DOTNET_ENVIRONMENT": "Development",
-        "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "http://localhost:19088",
-        "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "http://localhost:20229"
+        "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "http://localhost:19175",
+        "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "http://localhost:20105"
+      }
+    },
+    "generate-manifest": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "dotnetRunMessages": true,
+      "commandLineArgs": "--publisher manifest --output-path aspire-manifest.json",
+      "applicationUrl": "http://localhost:15888",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_ENVIRONMENT": "Development",
+        "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "http://localhost:16175"
       }
     }
   }
 }
+
+//{
+//  "$schema": "https://json.schemastore.org/launchsettings.json",
+//  "profiles": {
+//    "https": {
+//      "commandName": "Project",
+//      "dotnetRunMessages": true,
+//      "launchBrowser": true,
+//      "applicationUrl": "https://localhost:17153;http://localhost:15023",
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Development",
+//        "DOTNET_ENVIRONMENT": "Development",
+//        "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "https://localhost:21218",
+//        "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22000"
+//      }
+//    },
+//    "http": {
+//      "commandName": "Project",
+//      "dotnetRunMessages": true,
+//      "launchBrowser": true,
+//      "applicationUrl": "http://localhost:15023",
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Development",
+//        "DOTNET_ENVIRONMENT": "Development",
+//        "DOTNET_DASHBOARD_OTLP_ENDPOINT_URL": "http://localhost:19088",
+//        "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "http://localhost:20229"
+//      }
+//    }
+//  }
+//}

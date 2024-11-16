@@ -14,12 +14,12 @@
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.0.0" />
-    <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
     <PackageReference Include="Keycloak.AuthServices.Aspire.Hosting" Version="0.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DogQuiz.API\DogQuiz.API.csproj" />
+    <ProjectReference Include="..\DogQuiz.MigrationService\DogQuiz.MigrationService.csproj" />
   </ItemGroup>
 
 </Project>

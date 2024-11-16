@@ -1,4 +1,4 @@
-﻿using DogQuiz.API.Dtos;
+﻿using DogQuiz.Data.Dtos;
 using DogQuiz.API.Services.Interfaces;
 
 namespace DogQuiz.API.Services;

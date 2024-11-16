@@ -1,7 +1,7 @@
-﻿using DogQuiz.API.Data;
-using DogQuiz.API.Dtos;
+﻿using DogQuiz.Data.Dtos;
 using DogQuiz.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using DogQuiz.Data;
 
 namespace DogQuiz.API.Controllers;
 
