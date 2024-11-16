@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using OpenTelemetry.Trace;
 
-namespace DatabaseMigrations.MigrationService;
+namespace DogQuiz.MigrationService;
 
 public class ApiDbInitializer(
     IServiceProvider serviceProvider,
@@ -54,7 +54,6 @@ public class ApiDbInitializer(
         });
     }
 
-    // ERROR?: Throws System.IO.FileNotFoundException -> cannot find assembly DatabaseMigrations.MigrationService
     private static async Task RunMigrationAsync(ApplicationDbContext dbContext, CancellationToken cancellationToken)
     {
         var strategy = dbContext.Database.CreateExecutionStrategy();

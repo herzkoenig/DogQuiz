@@ -1,12 +1,8 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
 using DogQuiz.API.Services;
 using DogQuiz.API.Services.Interfaces;
 using DogQuiz.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-using DogQuiz.Data;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +24,8 @@ app.MapDefaultEndpoints();
 
 app.Run();
 
+/* The above configuration is intended to get migrations fully working; *
+ * later, switch back to the previous configuration below.				*/
 
 //using DogQuiz.API.Services;
 //using DogQuiz.API.Services.Interfaces;

@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.MigrationService", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{74E569B6-BCFB-44EA-B152-CD26B00418F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Images", "DogQuiz.Images\DogQuiz.Images.csproj", "{00B6EBD4-AB8E-4EE0-977D-32012A8DF113}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{3395CAFE-EBA7-409C-BC0D-D081206F1A3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3395CAFE-EBA7-409C-BC0D-D081206F1A3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3395CAFE-EBA7-409C-BC0D-D081206F1A3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00B6EBD4-AB8E-4EE0-977D-32012A8DF113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00B6EBD4-AB8E-4EE0-977D-32012A8DF113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00B6EBD4-AB8E-4EE0-977D-32012A8DF113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00B6EBD4-AB8E-4EE0-977D-32012A8DF113}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
