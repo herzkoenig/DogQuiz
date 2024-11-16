@@ -7,67 +7,67 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Images\Akita\Akita_Inu_dog.json">
+    <Content Include="Breeds\Akita\Akita_Inu_dog.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\Beagle\Beagle_lying_on_a_table.json">
+    <Content Include="Breeds\Beagle\Beagle_lying_on_a_table.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\FrenchBulldog\2008-07-28_Dog_at_Frolick_Field.json">
+    <Content Include="Breeds\FrenchBulldog\2008-07-28_Dog_at_Frolick_Field.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\GermanShorthairedPointer\Duitse_staande_korthaar_10-10-2.json">
+    <Content Include="Breeds\GermanShorthairedPointer\Duitse_staande_korthaar_10-10-2.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\GoldenRetriever\Golden_Retriever_Dukedestiny01_drvd.json">
+    <Content Include="Breeds\GoldenRetriever\Golden_Retriever_Dukedestiny01_drvd.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\JackRusselTerrier\Szczenie_Jack_Russell_Terrier3.json">
+    <Content Include="Breeds\JackRusselTerrier\Szczenie_Jack_Russell_Terrier3.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\LabradorRetriever\Labrador_on_Quantock_(2175262184).json">
+    <Content Include="Breeds\LabradorRetriever\Labrador_on_Quantock_(2175262184).json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\Poodle\Pudel_kleinweiss.json">
+    <Content Include="Breeds\Poodle\Pudel_kleinweiss.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\Poodle\Toy_Poodle_wearing_clothes_in_Tokyo.json">
+    <Content Include="Breeds\Poodle\Toy_Poodle_wearing_clothes_in_Tokyo.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\Poodle\Waterdog_standard_poodle01.json">
+    <Content Include="Breeds\Poodle\Waterdog_standard_poodle01.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\St.Bernard\Rey_nieve.json">
+    <Content Include="Breeds\St.Bernard\Rey_nieve.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\WelshCorgi\Welsh_Corgi_Cardigan_named_Flow_2020_3.json">
+    <Content Include="Breeds\WelshCorgi\Welsh_Corgi_Cardigan_named_Flow_2020_3.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Images\WelshTerrier\Welch_Terrier_on_sand_-_2007.json">
+    <Content Include="Breeds\WelshTerrier\Welch_Terrier_on_sand_-_2007.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
