@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="8.2.2" />
+    <PackageReference Include="Keycloak.AuthServices.Aspire.Hosting" Version="0.1.0" />
+    <PackageReference Include="Keycloak.AuthServices.Authentication" Version="2.5.3" />
+    <PackageReference Include="Keycloak.AuthServices.Common" Version="2.5.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
@@ -23,5 +26,9 @@
     <ProjectReference Include="..\DogQuiz.Data\DogQuiz.Data.csproj" />
     <ProjectReference Include="..\DogQuiz.ServiceDefaults\DogQuiz.ServiceDefaults.csproj" />
   </ItemGroup>
+	
+<ItemGroup>
+  <Content Update="wwwroot\**\*.*" CopyToPublishDirectory="Never" />
+</ItemGroup>
 
 </Project>

@@ -22,8 +22,4 @@
     <ProjectReference Include="..\DogQuiz.MigrationService\DogQuiz.MigrationService.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Keycloak\" />
-  </ItemGroup>
-
 </Project>

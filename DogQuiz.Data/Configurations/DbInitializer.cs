@@ -1,39 +1,81 @@
-﻿namespace DogQuiz.Data.Configurations;
+﻿using DogQuiz.Data.Entities.Auth;
+using Microsoft.Extensions.Configuration;
+using System;
 
-public static class DbInitializer
+namespace DogQuiz.Data.Configurations;
+
+public class DatabaseInitializer
 {
-    //public static async Task SeedAdminUserAndRole(IServiceProvider serviceProvider, IConfiguration configuration)
+
+    //private readonly ApplicationDbContext _context;
+    //private readonly IConfiguration _configuration;
+
+    //public DatabaseInitializer(ApplicationDbContext context, IConfiguration configuration)
     //{
-    //    var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
-    //    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-    //    string adminRole = "Admin";
-
-    //    var adminUserConfig = configuration.GetSection("AdminUser");
-    //    string adminUsername = adminUserConfig["Username"] ?? throw new Exception("Admin username not set in appsettings.Development.json.");
-    //    string adminEmail = adminUserConfig["Email"] ?? throw new Exception("Admin email not set in appsettings.Development.json."); ;
-    //    string adminPassword = adminUserConfig["Password"] ?? throw new Exception("Admin password not set in appsettings.Development.json."); ;
-
-    //    if (!await roleManager.RoleExistsAsync(adminRole))
+    //    _context = context;
+    //    _configuration = configuration;
+    //}
+    //public async Task SeedAsync()
+    //{
+    //    if (!_context.Roles.Any())
     //    {
-    //        await roleManager.CreateAsync(new IdentityRole(adminRole));
-    //    }
-
-    //    var adminUser = await userManager.FindByEmailAsync(adminEmail);
-    //    if (adminUser == null)
-    //    {
-    //        adminUser = new User
+    //        // Define permissions
+    //        var permissions = new List<Permission>
     //        {
-    //            UserName = adminUsername,
-    //            Email = adminEmail,
-    //            EmailConfirmed = true
+    //            new Permission { Name = "User.Create", Description = "Create new users", Category = "User Management" },
+    //            new Permission { Name = "User.View", Description = "View users", Category = "User Management" },
+    //            new Permission { Name = "User.Edit", Description = "Edit existing users", Category = "User Management" },
+    //            new Permission { Name = "User.Delete", Description = "Delete users", Category = "User Management" },
+    //            new Permission { Name = "Role.Create", Description = "Create roles", Category = "Role Management" },
+    //            new Permission { Name = "Role.View", Description = "View roles", Category = "Role Management" },
+    //            new Permission { Name = "Role.Edit", Description = "Edit roles", Category = "Role Management" },
+    //            new Permission { Name = "Role.Delete", Description = "Delete roles", Category = "Role Management" },
+    //            new Permission { Name = "Permission.Assign", Description = "Assign permissions to roles", Category = "Permission Management" },
+    //            new Permission { Name = "Report.View", Description = "View reports", Category = "Reporting" },
+    //            new Permission { Name = "Report.Generate", Description = "Generate new reports", Category = "Reporting" },
     //        };
 
-    //        var result = await userManager.CreateAsync(adminUser, adminPassword);
-    //        if (result.Succeeded)
+    //        // Define roles
+    //        var adminRole = new Role
     //        {
-    //            await userManager.AddToRoleAsync(adminUser, adminRole);
-    //        }
+    //            Name = "Admin",
+    //            Description = "Administrator with full permissions",
+    //            Permissions = permissions
+    //        };
+
+    //        var userRole = new Role
+    //        {
+    //            Name = "User",
+    //            Description = "Standard user with limited access",
+    //            Permissions = permissions.Where(p => p.Name == "User.View").ToList()
+    //        };
+
+    //        // Add roles and permissions to the context
+    //        _context.Permissions.AddRange(permissions);
+    //        _context.Roles.AddRange(adminRole, userRole);
+
+    //        // Define users
+    //        var adminUser = new User
+    //        {
+    //            IdentityProviderId = _configuration["Admin:IdentityProviderId"] ?? "admin-keycloak-id",
+    //            Username = _configuration["Admin:Username"] ?? "admin",
+    //            Email = _configuration["Admin:Email"] ?? "admin@example.com",
+    //            Role = adminRole
+    //        };
+
+    //        var regularUser = new User
+    //        {
+    //            IdentityProviderId = "user-keycloak-id",
+    //            Username = "user",
+    //            Email = "user@example.com",
+    //            Role = userRole
+    //        };
+
+    //        // Add users to the context
+    //        _context.Users.AddRange(adminUser, regularUser);
+
+    //        // Save changes
+    //        await _context.SaveChangesAsync();
     //    }
     //}
 }

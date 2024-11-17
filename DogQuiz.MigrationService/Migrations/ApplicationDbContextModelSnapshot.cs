@@ -17,7 +17,7 @@ namespace DogQuiz.MigrationService.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -37,6 +37,54 @@ namespace DogQuiz.MigrationService.Migrations
                     b.ToTable("BreedBreedMix");
                 });
 
+            modelBuilder.Entity("DogQuiz.Data.Entities.Auth.Permission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Permissions");
+                });
+
+            modelBuilder.Entity("DogQuiz.Data.Entities.Auth.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("DogQuiz.Data.Entities.Auth.User", b =>
                 {
                     b.Property<int>("Id")
@@ -45,13 +93,29 @@ namespace DogQuiz.MigrationService.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityProviderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("DogQuiz.Data.Entities.Bases.Answer", b =>
@@ -795,6 +859,21 @@ namespace DogQuiz.MigrationService.Migrations
                     b.ToTable("Facts");
                 });
 
+            modelBuilder.Entity("PermissionRole", b =>
+                {
+                    b.Property<int>("PermissionsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RolesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PermissionsId", "RolesId");
+
+                    b.HasIndex("RolesId");
+
+                    b.ToTable("PermissionRole");
+                });
+
             modelBuilder.Entity("DogQuiz.Data.Entities.Questionnaire.AnswerBoolean", b =>
                 {
                     b.HasBaseType("DogQuiz.Data.Entities.Bases.Answer");
@@ -828,6 +907,24 @@ namespace DogQuiz.MigrationService.Migrations
                         .HasForeignKey("BreedMixId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DogQuiz.Data.Entities.Auth.Permission", b =>
+                {
+                    b.HasOne("DogQuiz.Data.Entities.Auth.User", null)
+                        .WithMany("SpecialPermission")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("DogQuiz.Data.Entities.Auth.User", b =>
+                {
+                    b.HasOne("DogQuiz.Data.Entities.Auth.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("DogQuiz.Data.Entities.Bases.Answer", b =>
@@ -1229,6 +1326,31 @@ namespace DogQuiz.MigrationService.Migrations
                     b.Navigation("DeletedBy");
 
                     b.Navigation("UpdatedBy");
+                });
+
+            modelBuilder.Entity("PermissionRole", b =>
+                {
+                    b.HasOne("DogQuiz.Data.Entities.Auth.Permission", null)
+                        .WithMany()
+                        .HasForeignKey("PermissionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DogQuiz.Data.Entities.Auth.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DogQuiz.Data.Entities.Auth.Role", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("DogQuiz.Data.Entities.Auth.User", b =>
+                {
+                    b.Navigation("SpecialPermission");
                 });
 
             modelBuilder.Entity("DogQuiz.Data.Entities.Bases.Question", b =>

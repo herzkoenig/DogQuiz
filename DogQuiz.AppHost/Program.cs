@@ -8,7 +8,6 @@ using Aspire.Hosting.Keycloak;
 var builder = DistributedApplication.CreateBuilder(args);
 
 var sqlserver = builder.AddSqlServer("sqlserver")
-    //.WithDataVolume()
     .WithLifetime(ContainerLifetime.Persistent);
 
 var sqldb = sqlserver.AddDatabase("sqldb");

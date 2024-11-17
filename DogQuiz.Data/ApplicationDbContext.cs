@@ -1,4 +1,5 @@
-﻿using DogQuiz.Data.Entities.Bases;
+﻿using DogQuiz.Data.Entities.Auth;
+using DogQuiz.Data.Entities.Bases;
 using DogQuiz.Data.Entities.Breeds;
 using DogQuiz.Data.Entities.General;
 using DogQuiz.Data.Entities.Questionnaire;
@@ -22,10 +23,14 @@ public class ApplicationDbContext : DbContext
     public DbSet<Question> Questions => Set<Question>();
     public DbSet<Tag> Tags => Set<Tag>();
     public DbSet<TagGroup> TagGroups => Set<TagGroup>();
+    public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<Permission> Permissions { get; set; }
 
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
     }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

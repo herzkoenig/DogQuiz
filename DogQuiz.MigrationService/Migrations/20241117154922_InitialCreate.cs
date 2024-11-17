@@ -25,16 +25,40 @@ namespace DogQuiz.MigrationService.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdentityProviderId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,19 +85,40 @@ namespace DogQuiz.MigrationService.Migrations
                         principalTable: "BreedCollection",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BreedMixes_User_CreatedById",
+                        name: "FK_BreedMixes_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BreedMixes_User_DeletedById",
+                        name: "FK_BreedMixes_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BreedMixes_User_UpdatedById",
+                        name: "FK_BreedMixes_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Permissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Permissions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -96,20 +141,44 @@ namespace DogQuiz.MigrationService.Migrations
                 {
                     table.PrimaryKey("PK_TagGroups", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TagGroups_User_CreatedById",
+                        name: "FK_TagGroups_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_TagGroups_User_DeletedById",
+                        name: "FK_TagGroups_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_TagGroups_User_UpdatedById",
+                        name: "FK_TagGroups_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PermissionRole",
+                columns: table => new
+                {
+                    PermissionsId = table.Column<int>(type: "int", nullable: false),
+                    RolesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PermissionRole", x => new { x.PermissionsId, x.RolesId });
+                    table.ForeignKey(
+                        name: "FK_PermissionRole_Permissions_PermissionsId",
+                        column: x => x.PermissionsId,
+                        principalTable: "Permissions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PermissionRole_Roles_RolesId",
+                        column: x => x.RolesId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,19 +202,19 @@ namespace DogQuiz.MigrationService.Migrations
                 {
                     table.PrimaryKey("PK_Answers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Answers_User_CreatedById",
+                        name: "FK_Answers_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Answers_User_DeletedById",
+                        name: "FK_Answers_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Answers_User_UpdatedById",
+                        name: "FK_Answers_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -188,19 +257,19 @@ namespace DogQuiz.MigrationService.Migrations
                 {
                     table.PrimaryKey("PK_BreedNames", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BreedNames_User_CreatedById",
+                        name: "FK_BreedNames_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BreedNames_User_DeletedById",
+                        name: "FK_BreedNames_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BreedNames_User_UpdatedById",
+                        name: "FK_BreedNames_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -224,19 +293,19 @@ namespace DogQuiz.MigrationService.Migrations
                 {
                     table.PrimaryKey("PK_BreedRoles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BreedRoles_User_CreatedById",
+                        name: "FK_BreedRoles_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BreedRoles_User_DeletedById",
+                        name: "FK_BreedRoles_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BreedRoles_User_UpdatedById",
+                        name: "FK_BreedRoles_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -269,19 +338,19 @@ namespace DogQuiz.MigrationService.Migrations
                         principalTable: "BreedCollection",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Breeds_User_CreatedById",
+                        name: "FK_Breeds_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Breeds_User_DeletedById",
+                        name: "FK_Breeds_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Breeds_User_UpdatedById",
+                        name: "FK_Breeds_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -317,19 +386,19 @@ namespace DogQuiz.MigrationService.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BreedVarieties_User_CreatedById",
+                        name: "FK_BreedVarieties_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BreedVarieties_User_DeletedById",
+                        name: "FK_BreedVarieties_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BreedVarieties_User_UpdatedById",
+                        name: "FK_BreedVarieties_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -359,19 +428,19 @@ namespace DogQuiz.MigrationService.Migrations
                         principalTable: "Breeds",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Facts_User_CreatedById",
+                        name: "FK_Facts_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Facts_User_DeletedById",
+                        name: "FK_Facts_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Facts_User_UpdatedById",
+                        name: "FK_Facts_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -403,19 +472,19 @@ namespace DogQuiz.MigrationService.Migrations
                         principalTable: "Breeds",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Questions_User_CreatedById",
+                        name: "FK_Questions_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Questions_User_DeletedById",
+                        name: "FK_Questions_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Questions_User_UpdatedById",
+                        name: "FK_Questions_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -452,19 +521,19 @@ namespace DogQuiz.MigrationService.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Tags_User_CreatedById",
+                        name: "FK_Tags_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Tags_User_DeletedById",
+                        name: "FK_Tags_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Tags_User_UpdatedById",
+                        name: "FK_Tags_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -501,14 +570,14 @@ namespace DogQuiz.MigrationService.Migrations
                         principalTable: "Breeds",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ImageDetails_User_CreatedById",
+                        name: "FK_ImageDetails_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ImageDetails_User_UpdatedById",
+                        name: "FK_ImageDetails_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -557,19 +626,19 @@ namespace DogQuiz.MigrationService.Migrations
                         principalTable: "ImageDetails",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_NotableDogs_User_CreatedById",
+                        name: "FK_NotableDogs_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_NotableDogs_User_DeletedById",
+                        name: "FK_NotableDogs_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_NotableDogs_User_UpdatedById",
+                        name: "FK_NotableDogs_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -612,19 +681,19 @@ namespace DogQuiz.MigrationService.Migrations
                         principalTable: "ImageDetails",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_NotableOwners_User_CreatedById",
+                        name: "FK_NotableOwners_Users_CreatedById",
                         column: x => x.CreatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_NotableOwners_User_DeletedById",
+                        name: "FK_NotableOwners_Users_DeletedById",
                         column: x => x.DeletedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_NotableOwners_User_UpdatedById",
+                        name: "FK_NotableOwners_Users_UpdatedById",
                         column: x => x.UpdatedById,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -885,6 +954,16 @@ namespace DogQuiz.MigrationService.Migrations
                 column: "UpdatedById");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PermissionRole_RolesId",
+                table: "PermissionRole",
+                column: "RolesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permissions_UserId",
+                table: "Permissions",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Questions_BreedId",
                 table: "Questions",
                 column: "BreedId");
@@ -943,6 +1022,11 @@ namespace DogQuiz.MigrationService.Migrations
                 name: "IX_Tags_UpdatedById",
                 table: "Tags",
                 column: "UpdatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_RoleId",
+                table: "Users",
+                column: "RoleId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Answers_Questions_Id",
@@ -1008,71 +1092,71 @@ namespace DogQuiz.MigrationService.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_BreedMixes_User_CreatedById",
+                name: "FK_BreedMixes_Users_CreatedById",
                 table: "BreedMixes");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_BreedMixes_User_DeletedById",
+                name: "FK_BreedMixes_Users_DeletedById",
                 table: "BreedMixes");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_BreedMixes_User_UpdatedById",
+                name: "FK_BreedMixes_Users_UpdatedById",
                 table: "BreedMixes");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Breeds_User_CreatedById",
+                name: "FK_Breeds_Users_CreatedById",
                 table: "Breeds");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Breeds_User_DeletedById",
+                name: "FK_Breeds_Users_DeletedById",
                 table: "Breeds");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Breeds_User_UpdatedById",
+                name: "FK_Breeds_Users_UpdatedById",
                 table: "Breeds");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_BreedVarieties_User_CreatedById",
+                name: "FK_BreedVarieties_Users_CreatedById",
                 table: "BreedVarieties");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_BreedVarieties_User_DeletedById",
+                name: "FK_BreedVarieties_Users_DeletedById",
                 table: "BreedVarieties");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_BreedVarieties_User_UpdatedById",
+                name: "FK_BreedVarieties_Users_UpdatedById",
                 table: "BreedVarieties");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ImageDetails_User_CreatedById",
+                name: "FK_ImageDetails_Users_CreatedById",
                 table: "ImageDetails");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_ImageDetails_User_UpdatedById",
+                name: "FK_ImageDetails_Users_UpdatedById",
                 table: "ImageDetails");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_NotableDogs_User_CreatedById",
+                name: "FK_NotableDogs_Users_CreatedById",
                 table: "NotableDogs");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_NotableDogs_User_DeletedById",
+                name: "FK_NotableDogs_Users_DeletedById",
                 table: "NotableDogs");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_NotableDogs_User_UpdatedById",
+                name: "FK_NotableDogs_Users_UpdatedById",
                 table: "NotableDogs");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_NotableOwners_User_CreatedById",
+                name: "FK_NotableOwners_Users_CreatedById",
                 table: "NotableOwners");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_NotableOwners_User_DeletedById",
+                name: "FK_NotableOwners_Users_DeletedById",
                 table: "NotableOwners");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_NotableOwners_User_UpdatedById",
+                name: "FK_NotableOwners_Users_UpdatedById",
                 table: "NotableOwners");
 
             migrationBuilder.DropForeignKey(
@@ -1135,16 +1219,25 @@ namespace DogQuiz.MigrationService.Migrations
                 name: "Facts");
 
             migrationBuilder.DropTable(
+                name: "PermissionRole");
+
+            migrationBuilder.DropTable(
                 name: "Tags");
 
             migrationBuilder.DropTable(
                 name: "Questions");
 
             migrationBuilder.DropTable(
+                name: "Permissions");
+
+            migrationBuilder.DropTable(
                 name: "TagGroups");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "BreedMixes");
