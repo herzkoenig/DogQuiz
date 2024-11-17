@@ -2,7 +2,7 @@
 
 namespace DogQuiz.Data.Entities.Auth;
 
-public class Role
+public class PermissionRole
 {
     public int Id { get; set; }
     public required string Name { get; set; }

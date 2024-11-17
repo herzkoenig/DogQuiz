@@ -41,7 +41,7 @@
 //		//        .Generate(f.Random.Int(0, 2)))  // Generates up to 2 varieties
 //		//    .RuleFor(b => b.Roles, f => new Faker<BreedRole>()
 //		//        .RuleFor(r => r.Id, f => f.Random.Int(1, 1000))
-//		//        .RuleFor(r => r.Role, f => f.PickRandom<BreedRoleType>())
+//		//        .RuleFor(r => r.PermissionRole, f => f.PickRandom<BreedRoleType>())
 //		//        .Generate(f.Random.Int(1, 3)))  // Generates 1 to 3 roles
 //		//    .RuleFor(b => b.Facts, f => new Faker<Fact>()
 //		//        .RuleFor(fa => fa.Id, f => f.Random.Int(1, 1000))

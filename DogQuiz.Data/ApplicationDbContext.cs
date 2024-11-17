@@ -24,64 +24,41 @@ public class ApplicationDbContext : DbContext
     public DbSet<Tag> Tags => Set<Tag>();
     public DbSet<TagGroup> TagGroups => Set<TagGroup>();
     public DbSet<User> Users { get; set; }
-    public DbSet<Role> Roles { get; set; }
+    public DbSet<PermissionRole> PermissionRoles { get; set; }
     public DbSet<Permission> Permissions { get; set; }
 
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
     }
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        // MODEL: Breed
-        modelBuilder.Entity<Breed>(entity =>
+        modelBuilder.ApplyConfiguration(new Breed.BreedConfiguration());
+        modelBuilder.ApplyConfiguration(new BreedCollection.BreedCollectionConfiguration());
+        modelBuilder.ApplyConfiguration(new BreedMix.BreedMixConfiguration());
+        modelBuilder.ApplyConfiguration(new BreedName.BreedNameConfiguration());
+        modelBuilder.ApplyConfiguration(new BreedRole.BreedRoleConfiguration());
+        modelBuilder.ApplyConfiguration(new BreedVariety.BreedVarietyConfiguration());
+        modelBuilder.ApplyConfiguration(new NotableOwner.NotableOwnerConfiguration());
+        modelBuilder.ApplyConfiguration(new NotableDog.NotableDogConfiguration());
+
+        // Store Enums as Strings
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
-            entity.Property(b => b.Name).IsRequired(); // Required: Breed.Name
-            entity.HasIndex(b => b.Name)
-                .IsUnique();
-        });
+            foreach (var property in entityType.GetProperties())
+            {
+                if (property.ClrType.IsEnum)
+                {
+                    modelBuilder.Entity(entityType.ClrType)
+                                .Property(property.Name)
+                                .HasConversion<string>();
+                }
+            }
+        }
 
-        // MODEL: Fact
-        //modelBuilder.Entity<Fact>(entity =>
-        //{
-        //    entity.Property(bf => bf.Breed).IsRequired(); // Required: BreedFact.BreedId
-        //    entity.Property(bf => bf.Content).IsRequired(); // Required: BreedFact.Content
-        //});
-
-        modelBuilder.Entity<Question>()
-        .HasOne(q => q.Answer)
-        .WithOne(a => a.Question)
-        .HasForeignKey<Answer>(a => a.Id)
-        .OnDelete(DeleteBehavior.Cascade);
-
-        modelBuilder.Entity<Answer>()
-            .HasDiscriminator<string>("AnswerType")
-            .HasValue<AnswerBoolean>("TrueFalse")
-            .HasValue<AnswerText>("Test");
-
-        //modelBuilder.Entity<BreedMix>()
-        //    .HasMany(bm => bm.Breeds)
-        //    .WithMany();
-
-        modelBuilder.Entity<BreedMix>()
-               .HasMany(bm => bm.Breeds)
-               .WithMany(b => b.BreedMixes) // Ensure this navigation property exists in Breed
-               .UsingEntity<Dictionary<string, object>>(
-                   "BreedBreedMix", // Name of the join table
-                   j => j
-                       .HasOne<Breed>()
-                       .WithMany()
-                       .HasForeignKey("BreedId")
-                       .OnDelete(DeleteBehavior.Cascade),
-                   j => j
-                       .HasOne<BreedMix>()
-                       .WithMany()
-                       .HasForeignKey("BreedMixId")
-                       .OnDelete(DeleteBehavior.Cascade)
-               );
+        // https://blog.jetbrains.com/dotnet/2023/06/14/how-to-implement-a-soft-delete-strategy-with-entity-framework-core/
 
         /* DOESN'T WORK ANYMORE WITH MY NEW BASECLASSES */
         // Apply global query filter for soft delete on entities inheriting from AuditableEntityWithSoftDelete
@@ -98,23 +75,6 @@ public class ApplicationDbContext : DbContext
         //    }
         //}
 
-        // Loop through each entity type in the model
-        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-        {
-            // Loop through each property in the entity
-            foreach (var property in entityType.GetProperties())
-            {
-                // Check if the property type is an enum
-                if (property.ClrType.IsEnum)
-                {
-                    // Apply the conversion to store enums as strings
-                    modelBuilder.Entity(entityType.ClrType)
-                                .Property(property.Name)
-                                .HasConversion<string>();
-                }
-            }
-        }
-
         /* DOESN'T WORK ANYMORE WITH MY NEW BASECLASSES */
         //modelBuilder.ApplySoftDeleteFilter();
         //modelBuilder.ConvertEnumsToStrings();
@@ -127,6 +87,4 @@ public class ApplicationDbContext : DbContext
 
     //    //// Hacky logging to Console!
     //    optionsBuilder.LogTo(Console.WriteLine);
-
-    //}
 }

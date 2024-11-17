@@ -68,7 +68,7 @@ namespace DogQuiz.MigrationService.Migrations
                     b.ToTable("Permissions");
                 });
 
-            modelBuilder.Entity("DogQuiz.Data.Entities.Auth.Role", b =>
+            modelBuilder.Entity("DogQuiz.Data.Entities.Auth.PermissionRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -439,7 +439,7 @@ namespace DogQuiz.MigrationService.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Role")
+                    b.Property<string>("PermissionRole")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -877,7 +877,7 @@ namespace DogQuiz.MigrationService.Migrations
                     b.ToTable("PermissionRole");
                 });
 
-            modelBuilder.Entity("DogQuiz.Data.Entities.Questionnaire.AnswerBoolean", b =>
+            modelBuilder.Entity("DogQuiz.Data.Entities.Questionnaire.AnswerTrueFalse", b =>
                 {
                     b.HasBaseType("DogQuiz.Data.Entities.Bases.Answer");
 
@@ -921,13 +921,13 @@ namespace DogQuiz.MigrationService.Migrations
 
             modelBuilder.Entity("DogQuiz.Data.Entities.Auth.User", b =>
                 {
-                    b.HasOne("DogQuiz.Data.Entities.Auth.Role", "Role")
+                    b.HasOne("DogQuiz.Data.Entities.Auth.PermissionRole", "PermissionRole")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Role");
+                    b.Navigation("PermissionRole");
                 });
 
             modelBuilder.Entity("DogQuiz.Data.Entities.Bases.Answer", b =>
@@ -1339,14 +1339,14 @@ namespace DogQuiz.MigrationService.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DogQuiz.Data.Entities.Auth.Role", null)
+                    b.HasOne("DogQuiz.Data.Entities.Auth.PermissionRole", null)
                         .WithMany()
                         .HasForeignKey("RolesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DogQuiz.Data.Entities.Auth.Role", b =>
+            modelBuilder.Entity("DogQuiz.Data.Entities.Auth.PermissionRole", b =>
                 {
                     b.Navigation("Users");
                 });

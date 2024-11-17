@@ -26,24 +26,24 @@ public class DatabaseInitializer
     //            new Permission { Name = "User.View", Description = "View users", Category = "User Management" },
     //            new Permission { Name = "User.Edit", Description = "Edit existing users", Category = "User Management" },
     //            new Permission { Name = "User.Delete", Description = "Delete users", Category = "User Management" },
-    //            new Permission { Name = "Role.Create", Description = "Create roles", Category = "Role Management" },
-    //            new Permission { Name = "Role.View", Description = "View roles", Category = "Role Management" },
-    //            new Permission { Name = "Role.Edit", Description = "Edit roles", Category = "Role Management" },
-    //            new Permission { Name = "Role.Delete", Description = "Delete roles", Category = "Role Management" },
+    //            new Permission { Name = "PermissionRole.Create", Description = "Create roles", Category = "PermissionRole Management" },
+    //            new Permission { Name = "PermissionRole.View", Description = "View roles", Category = "PermissionRole Management" },
+    //            new Permission { Name = "PermissionRole.Edit", Description = "Edit roles", Category = "PermissionRole Management" },
+    //            new Permission { Name = "PermissionRole.Delete", Description = "Delete roles", Category = "PermissionRole Management" },
     //            new Permission { Name = "Permission.Assign", Description = "Assign permissions to roles", Category = "Permission Management" },
     //            new Permission { Name = "Report.View", Description = "View reports", Category = "Reporting" },
     //            new Permission { Name = "Report.Generate", Description = "Generate new reports", Category = "Reporting" },
     //        };
 
     //        // Define roles
-    //        var adminRole = new Role
+    //        var adminRole = new PermissionRole
     //        {
     //            Name = "Admin",
     //            Description = "Administrator with full permissions",
     //            Permissions = permissions
     //        };
 
-    //        var userRole = new Role
+    //        var userRole = new PermissionRole
     //        {
     //            Name = "User",
     //            Description = "Standard user with limited access",
@@ -60,7 +60,7 @@ public class DatabaseInitializer
     //            IdentityProviderId = _configuration["Admin:IdentityProviderId"] ?? "admin-keycloak-id",
     //            Username = _configuration["Admin:Username"] ?? "admin",
     //            Email = _configuration["Admin:Email"] ?? "admin@example.com",
-    //            Role = adminRole
+    //            PermissionRole = adminRole
     //        };
 
     //        var regularUser = new User
@@ -68,7 +68,7 @@ public class DatabaseInitializer
     //            IdentityProviderId = "user-keycloak-id",
     //            Username = "user",
     //            Email = "user@example.com",
-    //            Role = userRole
+    //            PermissionRole = userRole
     //        };
 
     //        // Add users to the context

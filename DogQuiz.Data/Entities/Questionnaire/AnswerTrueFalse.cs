@@ -3,9 +3,9 @@ using DogQuiz.Data.Enums;
 
 namespace DogQuiz.Data.Entities.Questionnaire;
 
-public class AnswerBoolean : Answer
+public class AnswerTrueFalse : Answer
 {
-    public AnswerBoolean()
+    public AnswerTrueFalse()
     {
         Type = AnswerType.TrueFalse;
     }
