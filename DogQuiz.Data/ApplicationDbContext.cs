@@ -10,31 +10,52 @@ namespace DogQuiz.Data;
 
 public class ApplicationDbContext : DbContext
 {
+    // Auth
+    public DbSet<Permission> Permissions { get; set; }
+    public DbSet<PermissionRole> PermissionRoles { get; set; }
+    public DbSet<User> Users { get; set; }
+
+    // Bases
     public DbSet<Answer> Answers => Set<Answer>();
+    public DbSet<Question> Questions => Set<Question>();
+
+    // Breeds
     public DbSet<Breed> Breeds => Set<Breed>();
+    public DbSet<BreedCollection> BreedCollections => Set<BreedCollection>();
     public DbSet<BreedMix> BreedMixes => Set<BreedMix>();
     public DbSet<BreedName> BreedNames => Set<BreedName>();
     public DbSet<BreedRole> BreedRoles => Set<BreedRole>();
     public DbSet<BreedVariety> BreedVarieties => Set<BreedVariety>();
-    public DbSet<Fact> Facts => Set<Fact>();
-    public DbSet<ImageDetail> ImageDetails => Set<ImageDetail>();
-    public DbSet<NotableDog> NotableDogs => Set<NotableDog>();
     public DbSet<NotableOwner> NotableOwners => Set<NotableOwner>();
-    public DbSet<Question> Questions => Set<Question>();
+    public DbSet<NotableDog> NotableDogs => Set<NotableDog>();
+
+    // General
+    public DbSet<ImageDetail> ImageDetails => Set<ImageDetail>();
     public DbSet<Tag> Tags => Set<Tag>();
     public DbSet<TagGroup> TagGroups => Set<TagGroup>();
-    public DbSet<User> Users { get; set; }
-    public DbSet<PermissionRole> PermissionRoles { get; set; }
-    public DbSet<Permission> Permissions { get; set; }
 
+    // Questionnaire
+    public DbSet<Fact> Facts => Set<Fact>();
+    // WeeklyUserSubmissions    
+
+#pragma warning disable 
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
     }
+#pragma warning restore 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
+        // Auth
+        modelBuilder.ApplyConfiguration(new Permission.PermissionConfiguration());
+        modelBuilder.ApplyConfiguration(new PermissionRole.PermissionRoleConfiguration());
+        modelBuilder.ApplyConfiguration(new User.UserConfiguration());
+        // Bases
+        modelBuilder.ApplyConfiguration(new Answer.AnswerConfiguration());
+        modelBuilder.ApplyConfiguration(new Question.QuestionConfiguration());
+        // Breeds
         modelBuilder.ApplyConfiguration(new Breed.BreedConfiguration());
         modelBuilder.ApplyConfiguration(new BreedCollection.BreedCollectionConfiguration());
         modelBuilder.ApplyConfiguration(new BreedMix.BreedMixConfiguration());
@@ -43,6 +64,13 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new BreedVariety.BreedVarietyConfiguration());
         modelBuilder.ApplyConfiguration(new NotableOwner.NotableOwnerConfiguration());
         modelBuilder.ApplyConfiguration(new NotableDog.NotableDogConfiguration());
+        // General
+        modelBuilder.ApplyConfiguration(new ImageDetail.ImageDetailConfiguration());
+        modelBuilder.ApplyConfiguration(new Tag.TagConfiguration());
+        modelBuilder.ApplyConfiguration(new TagGroup.TagGroupConfiguration());
+        // Questionnaire
+        modelBuilder.ApplyConfiguration(new AnswerText.AnswerTextConfiguration());
+        modelBuilder.ApplyConfiguration(new Fact.FactConfiguration());
 
         // Store Enums as Strings
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
@@ -80,7 +108,10 @@ public class ApplicationDbContext : DbContext
         //modelBuilder.ConvertEnumsToStrings();
     }
 
-    /* DOESN'T WORK WITH THE POOLING THAT IS SET UP WITH ASPIRE */
+    /* DOESN'T WORK WITH THE POOLING THAT IS SET UP WITH ASPIRE 
+                TODO: SEARCH ALTERNATIVE APPROACH.
+     */
+    
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //{
     //    base.OnConfiguring(optionsBuilder);

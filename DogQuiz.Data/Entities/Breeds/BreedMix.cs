@@ -1,15 +1,19 @@
-﻿using DogQuiz.Data.Entities.Bases;
+﻿using DogQuiz.Data.Configurations;
+using DogQuiz.Data.Entities.Bases;
 using DogQuiz.Data.Entities.General;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DogQuiz.Data.Entities.Breeds;
 
-public class BreedMix : AuditableEntityWithSoftDelete
+public class BreedMix : AuditableEntityWithSoftDelete, IQuestionable
 {
     public int Id { get; set; }
+    public string? Name { get; set; }
+    public string? Description { get; set; }
     public ICollection<Breed> Breeds { get; set; } = new List<Breed>();
     public ICollection<ImageDetail> Images { get; set; } = new List<ImageDetail>();
+    public ICollection<Question> Questions { get; } = new List<Question>();
 
 
     internal class BreedMixConfiguration : IEntityTypeConfiguration<BreedMix>
@@ -32,6 +36,12 @@ public class BreedMix : AuditableEntityWithSoftDelete
                         .HasForeignKey("BreedMixId")
                         .OnDelete(DeleteBehavior.Cascade)
                 );
+
+            builder.Property(bm => bm.Name)
+                .HasMaxLength(LengthConstants.NameMediumLength);
+
+            builder.Property(bm => bm.Description)
+                .HasMaxLength(LengthConstants.DescriptionMediumLength);
         }
     }
 }

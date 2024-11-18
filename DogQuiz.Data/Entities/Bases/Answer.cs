@@ -10,13 +10,10 @@ public abstract class Answer : AuditableEntityWithSoftDelete
     public AnswerType Type { get; set; }
     public required Question Question { get; set; }
 
-
-    internal class AnswerConfigurator : IEntityTypeConfiguration<Answer>
+    internal class AnswerConfiguration : IEntityTypeConfiguration<Answer>
     {
         public void Configure(EntityTypeBuilder<Answer> builder)
         {
-            // All enum members have to be written down here like that...
-            // TODO: Look for another solution, preferably without reflection, if that is possible.
             builder.HasDiscriminator<string>("AnswerType")
                 .HasValue<AnswerTrueFalse>(AnswerType.TrueFalse.ToString())
                 .HasValue<AnswerText>(AnswerType.Text.ToString());

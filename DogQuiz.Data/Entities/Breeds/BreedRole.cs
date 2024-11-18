@@ -2,6 +2,7 @@
 using DogQuiz.Data.Enums;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using DogQuiz.Data.Configurations;
 
 namespace DogQuiz.Data.Entities.Breeds;
 
@@ -16,6 +17,8 @@ public class BreedRole : AuditableEntityWithSoftDelete
     {
         public void Configure(EntityTypeBuilder<BreedName> builder)
         {
+            builder.Property(br => br.Name)
+                .HasMaxLength(LengthConstants.NameMediumLength);
         }
     }
 }

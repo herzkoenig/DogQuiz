@@ -3,6 +3,7 @@ using DogQuiz.Data.Enums;
 
 namespace DogQuiz.Data.Entities.Questionnaire;
 
+// integrate in a flat answer table
 public class AnswerTrueFalse : Answer
 {
     public AnswerTrueFalse()

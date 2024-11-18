@@ -2,7 +2,7 @@
 using DogQuiz.Data.Enums;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+using DogQuiz.Data.Configurations;
 
 namespace DogQuiz.Data.Entities.Bases;
 
@@ -14,25 +14,27 @@ public class Question : AuditableEntityWithSoftDelete
     public required QuestionType Type { get; set; }
     public int? Difficulty { get; set; }
     public Breed? Breed { get; set; }
+    public BreedMix? BreedMix { get; set; }
+    public BreedVariety? BreedVariety { get; set; }
     public required Answer Answer { get; set; }
 
 
-    internal class QuestionConfigurator : IEntityTypeConfiguration<Question>
+    internal class QuestionConfiguration : IEntityTypeConfiguration<Question>
     {
         public void Configure(EntityTypeBuilder<Question> builder)
         {
-            builder.Property(q => q.Title).HasMaxLength(150);
+            builder.Property(q => q.Title)
+                .HasMaxLength(LengthConstants.QuestionTitleLength);
 
-            builder.Property(q => q.Text).HasMaxLength(1000);
+            builder.Property(q => q.Text)
+                .HasMaxLength(LengthConstants.QuestionTextLength);
 
-            builder.HasOne(q => q.Breed)
-                .WithMany()
-                .OnDelete(DeleteBehavior.Cascade); // TODO: check if correct
+            builder
+                .HasOne(q => q.Answer)
+                .WithOne(a => a.Question)
+                .HasForeignKey<Answer>(a => a.Id)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(q => q.Answer)
-                .WithOne()
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade); // TODO: check if correct
         }
     }
 }

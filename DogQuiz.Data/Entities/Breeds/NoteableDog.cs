@@ -2,6 +2,7 @@
 using DogQuiz.Data.Entities.General;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using DogQuiz.Data.Configurations;
 
 namespace DogQuiz.Data.Entities.Breeds;
 
@@ -22,6 +23,14 @@ public class NotableDog : AuditableEntityWithSoftDelete
     {
         public void Configure(EntityTypeBuilder<NotableDog> builder)
         {
+            builder.Property(nd => nd.Name)
+                .HasMaxLength(LengthConstants.NameMediumLength);
+
+            builder.Property(nd => nd.KnownFor)
+                .HasMaxLength(LengthConstants.KnownForLength);
+
+            builder.Property(nd => nd.Description)
+                .HasMaxLength(LengthConstants.DescriptionMediumLength);
         }
     }
 }

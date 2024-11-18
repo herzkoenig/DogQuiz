@@ -3,5 +3,6 @@
 public enum QuestionType
 {
     Text,
-    Image
+    Image,
+    General
 }
