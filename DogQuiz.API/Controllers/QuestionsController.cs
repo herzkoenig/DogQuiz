@@ -1,5 +1,5 @@
-﻿namespace DogQuiz.API.Controllers;
+﻿//namespace DogQuiz.API.Controllers;
 
-public class QuestionsController
-{
-}
+//public class QuestionsController
+//{
+//}

@@ -1,9 +1,14 @@
-using DogQuiz.API.Services;
-using DogQuiz.API.Services.Interfaces;
-using DogQuiz.Data;
 using Keycloak.AuthServices.Authentication;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
+using DogQuiz.API.Middleware;
+using DogQuiz.Application.QuizManagement.Interfaces;
+using DogQuiz.Application.QuizManagement.Services;
+using DogQuiz.Infrastructure;
+using DogQuiz.Application.BreedManagement.Interfaces;
+using DogQuiz.Application.BreedManagement.Services;
+using DogQuiz.Application.GeneralManagement.Interfaces;
+using DogQuiz.Application.GeneralManagement.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IBreedService, BreedService>();
+builder.Services.AddScoped<IQuizService, QuizService>();
+builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("sqldb"), sqlOptions =>
@@ -27,10 +34,12 @@ builder.EnrichSqlServerDbContext<ApplicationDbContext>(settings =>
 	settings.DisableRetry = true);
 
 // TODO: Configure Keycloak!
-builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
-builder.Services.AddAuthorization();
+//builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
+//builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (!app.Environment.IsDevelopment())
 {
@@ -39,13 +48,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-//app.UseStaticFiles(new StaticFileOptions
-//{
-//	FileProvider = new PhysicalFileProvider(
-//		Path.Combine(Directory.GetCurrentDirectory(), "..", "DogQuiz.Images", "Breeds")),
-//	RequestPath = "/images"
-//});
 
 if (app.Environment.IsDevelopment())
 {

@@ -1,5 +1,5 @@
-﻿using DogQuiz.MigrationService;
-using DogQuiz.Data;
+﻿using DogQuiz.Infrastructure;
+using DogQuiz.MigrationService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = Host.CreateApplicationBuilder(args);

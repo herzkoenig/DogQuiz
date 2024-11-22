@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.ServiceDefaults", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.API", "DogQuiz.API\DogQuiz.API.csproj", "{197793F9-34B2-4930-B8FD-D81B11B5ECDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Data", "DogQuiz.Data\DogQuiz.Data.csproj", "{8CDDB6D6-B6B6-4C5D-BD71-8444C1DC87B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Domain", "DogQuiz.Domain\DogQuiz.Domain.csproj", "{8CDDB6D6-B6B6-4C5D-BD71-8444C1DC87B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.MigrationService", "DogQuiz.MigrationService\DogQuiz.MigrationService.csproj", "{3395CAFE-EBA7-409C-BC0D-D081206F1A3C}"
 EndProject
@@ -17,6 +17,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Images", "DogQuiz.Images\DogQuiz.Images.csproj", "{00B6EBD4-AB8E-4EE0-977D-32012A8DF113}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Tests", "DogQuiz.Tests\DogQuiz.Tests.csproj", "{E0B6D1F9-7C45-4126-93C2-E108C94F4B81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Infrastructure", "DogQuiz.Infrastructure\DogQuiz.Infrastructure.csproj", "{E676681F-C9F3-4E49-980D-E7A15E6C5AC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Application", "DogQuiz.Application\DogQuiz.Application.csproj", "{8141DCEB-718A-4C26-B8CA-813EB457E4EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +56,14 @@ Global
 		{E0B6D1F9-7C45-4126-93C2-E108C94F4B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0B6D1F9-7C45-4126-93C2-E108C94F4B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0B6D1F9-7C45-4126-93C2-E108C94F4B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E676681F-C9F3-4E49-980D-E7A15E6C5AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E676681F-C9F3-4E49-980D-E7A15E6C5AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E676681F-C9F3-4E49-980D-E7A15E6C5AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E676681F-C9F3-4E49-980D-E7A15E6C5AC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8141DCEB-718A-4C26-B8CA-813EB457E4EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8141DCEB-718A-4C26-B8CA-813EB457E4EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8141DCEB-718A-4C26-B8CA-813EB457E4EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8141DCEB-718A-4C26-B8CA-813EB457E4EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

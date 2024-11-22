@@ -1,7 +1,7 @@
-﻿using DogQuiz.Data.Dtos;
-using DogQuiz.API.Services.Interfaces;
+﻿using DogQuiz.API.Requests;
+using DogQuiz.Application.BreedManagement.Interfaces;
+using DogQuiz.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using DogQuiz.Data;
 
 namespace DogQuiz.API.Controllers;
 
@@ -18,84 +18,66 @@ public class BreedsController : ControllerBase
 		_breedService = breedService;
 	}
 
-	[HttpGet]
-	[ProducesResponseType(typeof(List<BreedDto>), StatusCodes.Status200OK)]
-	public async Task<IActionResult> GetAll()
+	[HttpPost]
+	public async Task<IActionResult> CreateBreed([FromBody] CreateBreedRequest request)
 	{
+		if (!ModelState.IsValid)
+			return BadRequest(ModelState);
 
-		var breeds = await _breedService.GetAllBreeds();
+		// Map the request to the Breed entity
+		var breed = request.ToBreed();
 
+		// Save the new breed using the service
+		var createdBreed = await _breedService.CreateBreedAsync(breed);
+
+		return CreatedAtAction(nameof(GetBreed), new { id = createdBreed.Id }, createdBreed);
+	}
+
+	[HttpPut("{id}")]
+	public async Task<IActionResult> UpdateBreed(int id, [FromBody] UpdateBreedRequest request)
+	{
+		if (!ModelState.IsValid)
+			return BadRequest(ModelState);
+
+		var existingBreed = await _breedService.GetBreedByIdAsync(id);
+		if (existingBreed == null)
+			return NotFound();
+
+		// Map the request to the existing Breed entity
+		request.UpdateBreedFromRequest(existingBreed);
+
+		// Update the breed using the service
+		var updatedBreed = await _breedService.UpdateBreedAsync(existingBreed);
+
+		return Ok(updatedBreed);
+	}
+
+	[HttpGet("{id}")]
+	public async Task<IActionResult> GetBreed(int id)
+	{
+		var breed = await _breedService.GetBreedByIdAsync(id);
+		if (breed == null)
+			return NotFound();
+
+		return Ok(breed);
+	}
+
+	[HttpGet]
+	public async Task<IActionResult> GetAllBreeds()
+	{
+		var breeds = await _breedService.GetAllBreedsAsync();
 		return Ok(breeds);
 	}
 
-	//[HttpGet("{id:int}")]
-	//[ProducesResponseType(typeof(Breed), StatusCodes.Status200OK)]
-	//[ProducesResponseType(StatusCodes.Status404NotFound)]
-	//public async Task<IActionResult> Get(int id)
-	//{
-	//    var breed = await _context.Breeds.FindAsync(id);
+	[HttpDelete("{id}")]
+	public async Task<IActionResult> DeleteBreed(int id)
+	{
+		var existingBreed = await _breedService.GetBreedByIdAsync(id);
+		if (existingBreed == null)
+			return NotFound();
 
-	//    return breed == null ? NotFound() : Ok(breed);
-	//}
+		await _breedService.DeleteBreedAsync(existingBreed);
 
-	//[HttpPost]
-	//[ProducesResponseType(typeof(Breed), StatusCodes.Status201Created)]
-	//public async Task<IActionResult> Create([FromBody] Breed breed)
-	//{
-	//    await _context.Breeds.AddAsync(breed);
-	//    await _context.SaveChangesAsync();
-
-	//    return CreatedAtAction(nameof(Get), new { id = breed.Id }, breed);
-	//}
-
-	//[HttpPut]
-	//[ProducesResponseType(typeof(Breed), StatusCodes.Status200OK)]
-	//[ProducesResponseType(StatusCodes.Status404NotFound)]
-	//public async Task<IActionResult> Update([FromRoute] int id, [FromBody] BreedDto breedDto)
-	//{
-	//    var existingBreed = await _context.Breeds.FindAsync(id);
-
-	//    if (existingBreed is null)
-	//        return NotFound();
-
-	//    existingBreed.Name = breedDto.Name ?? existingBreed.Name;
-	//    // TODO: extend/update! maybe use reflection for this?
-
-	//    await _context.SaveChangesAsync();
-
-	//    return Ok(existingBreed);
-	//}
-
-	//[HttpDelete]
-	//[ProducesResponseType(StatusCodes.Status200OK)]
-	//[ProducesResponseType(StatusCodes.Status404NotFound)]
-	//public async Task<IActionResult> Remove([FromRoute] int id)
-	//{
-	//    var existingBreed = await _context.Breeds.FindAsync(id);
-
-	//    if (existingBreed is null)
-	//        return NotFound();
-
-	//    // Any of these options will remove the breed from the context.
-	//    // _context.Remove(existingBreed);
-	//    // _context.Breeds.Remove(new Breed { Id = id});
-	//    _context.Breeds.Remove(existingBreed);
-
-	//    await _context.SaveChangesAsync();
-
-	//    return Ok();
-	//}
-
-	//[HttpGet("{Guid:Guid}/images")]
-	//[ProducesResponseType(typeof(List<ImageDetail>), StatusCodes.Status200OK)]
-	//[ProducesResponseType(StatusCodes.Status404NotFound)]
-	//public async Task<IActionResult> GetImages(int id)
-	//{
-	//    var breed = await _context.Breeds.Include(d => d.OtherImages).FirstOrDefaultAsync(d => d.Id == id);
-
-	//    if (breed == null)
-	//        return NotFound();
-
-	//    return Ok(breed.OtherImages);
-	//}
+		return NoContent();
+	}
 }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="8.2.2" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Keycloak.AuthServices.Aspire.Hosting" Version="0.1.0" />
     <PackageReference Include="Keycloak.AuthServices.Authentication" Version="2.5.3" />
     <PackageReference Include="Keycloak.AuthServices.Common" Version="2.5.3" />
@@ -18,12 +19,14 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Riok.Mapperly" Version="4.1.0" />
+    <PackageReference Include="OneOf" Version="3.0.271" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DogQuiz.Data\DogQuiz.Data.csproj" />
+    <ProjectReference Include="..\DogQuiz.Application\DogQuiz.Application.csproj" />
+    <ProjectReference Include="..\DogQuiz.Infrastructure\DogQuiz.Infrastructure.csproj" />
+    <ProjectReference Include="..\DogQuiz.Domain\DogQuiz.Domain.csproj" />
     <ProjectReference Include="..\DogQuiz.ServiceDefaults\DogQuiz.ServiceDefaults.csproj" />
   </ItemGroup>
 	

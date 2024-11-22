@@ -7,7 +7,9 @@ using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 
+#pragma warning disable IDE0130
 namespace Microsoft.Extensions.Hosting;
+#pragma warning restore
 
 public static class Extensions
 {
