@@ -1,5 +1,6 @@
 ﻿using DogQuiz.API.Requests;
 using DogQuiz.Application.BreedManagement.Interfaces;
+using DogQuiz.Domain.Aggregates.Breeds.Validation;
 using DogQuiz.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,16 @@ public class BreedsController : ControllerBase
 {
 	private readonly ApplicationDbContext _context;
 	private readonly IBreedService _breedService;
+	private readonly IBreedFactGeneratorService _breedFactGeneratorService;
 
-	public BreedsController(ApplicationDbContext context, IBreedService breedService)
+	public BreedsController(
+		 ApplicationDbContext context,
+		 IBreedService breedService,
+		 IBreedFactGeneratorService breedFactGeneratorService)
 	{
 		_context = context;
 		_breedService = breedService;
+		_breedFactGeneratorService = breedFactGeneratorService;
 	}
 
 	[HttpPost]
@@ -79,5 +85,32 @@ public class BreedsController : ControllerBase
 		await _breedService.DeleteBreedAsync(existingBreed);
 
 		return NoContent();
+	}
+
+	[HttpGet("{id}/random-fact")]
+	public async Task<IActionResult> GetRandomFact(int id)
+	{
+		try
+		{
+			// Validate the ID using the static BreedValidation class
+			BreedValidation.ValidateBreedId(id);
+
+			// Fetch the random fact
+			var fact = await _breedFactGeneratorService.GetRandomFactForBreedAsync(id);
+
+			if (fact == null)
+				return NotFound("No facts available for the specified breed.");
+
+			return Ok(fact);
+		}
+		catch (ArgumentException ex)
+		{
+			return BadRequest(ex.Message);
+		}
+		catch (Exception)
+		{
+			// Return a 500 Internal Server Error for unexpected exceptions
+			return StatusCode(500, "An unexpected error occurred.");
+		}
 	}
 }

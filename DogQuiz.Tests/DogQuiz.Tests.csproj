@@ -12,6 +12,7 @@
     <PackageReference Include="Aspire.Hosting.Testing" Version="9.0.0-rc.1.24511.1" />
     <PackageReference Include="coverlet.collector" Version="6.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="xunit" Version="2.9.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
   </ItemGroup>
@@ -28,7 +29,11 @@
     <Folder Include="E2ETests\" />
     <Folder Include="IntegrationTests\" />
     <Folder Include="SnapshotTests\" />
-    <Folder Include="UnitTests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DogQuiz.API\DogQuiz.API.csproj" />
+    <ProjectReference Include="..\DogQuiz.Application\DogQuiz.Application.csproj" />
   </ItemGroup>
 
 </Project>

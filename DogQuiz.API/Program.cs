@@ -22,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IBreedService, BreedService>();
 builder.Services.AddScoped<IQuizService, QuizService>();
 builder.Services.AddScoped<IFileUploadService, FileUploadService>();
+builder.Services.AddScoped<IBreedFactGeneratorService, BreedFactGeneratorService>();
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("sqldb"), sqlOptions =>

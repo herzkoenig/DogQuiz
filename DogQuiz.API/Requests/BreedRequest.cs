@@ -37,7 +37,26 @@ public static partial class BreedRequestMapper
 	[MapperIgnoreTarget(nameof(Breed.IsDeleted))]
 	[MapperIgnoreTarget(nameof(Breed.Origin))]
 	[MapperIgnoreTarget(nameof(Breed.Image))]
-	public static partial Breed ToBreed(this CreateBreedRequest request);
+	public static Breed ToBreed(this CreateBreedRequest request)
+	{
+		// Use the explicit constructor to initialize required properties
+		var breed = new Breed(request.Name, request.Description, request.Difficulty) { Name = request.Name };
+
+		// Populate additional names
+		foreach (var additionalName in request.AdditionalNames)
+		{
+			breed.AdditionalNames.Add(new BreedName { Name = additionalName });
+		}
+
+		// Populate tags
+		foreach (var tag in request.BreedTags)
+		{
+			breed.BreedTags.Add(new Tag { Name = tag });
+		}
+
+		return breed;
+	}
+
 	[MapperIgnoreTarget(nameof(Breed.CreatedBy))]
 	[MapperIgnoreTarget(nameof(Breed.UpdatedBy))]
 	[MapperIgnoreTarget(nameof(Breed.DeletedBy))]
@@ -48,11 +67,33 @@ public static partial class BreedRequestMapper
 	[MapperIgnoreTarget(nameof(Breed.IsDeleted))]
 	[MapperIgnoreTarget(nameof(Breed.Origin))]
 	[MapperIgnoreTarget(nameof(Breed.Image))]
-	public static partial void UpdateBreedFromRequest(this UpdateBreedRequest request, Breed breed);
+	public static void UpdateBreedFromRequest(this UpdateBreedRequest request, Breed breed)
+	{
+		if (request.Name is not null)
+			breed.Name = request.Name;
 
-#pragma warning disable IDE0051
-	private static Tag MapToTag(string tag) => new() { Name = tag };
-	private static BreedName MapToBreedName(string name) => new() { Name = name };
-#pragma warning restore
+		if (request.Description is not null)
+			breed.Description = request.Description;
+
+		if (request.Difficulty.HasValue)
+			breed.Difficulty = request.Difficulty;
+
+		if (request.AdditionalNames is not null)
+		{
+			breed.AdditionalNames.Clear();
+			foreach (var additionalName in request.AdditionalNames)
+			{
+				breed.AdditionalNames.Add(new BreedName { Name = additionalName });
+			}
+		}
+
+		if (request.BreedTags is not null)
+		{
+			breed.BreedTags.Clear();
+			foreach (var tag in request.BreedTags)
+			{
+				breed.BreedTags.Add(new Tag { Name = tag });
+			}
+		}
+	}
 }
-
