@@ -1,5 +1,5 @@
-﻿using DogQuiz.Domain.Aggregates.Breeds.Entities;
-using DogQuiz.Domain.Aggregates.General.Entities;
+﻿using DogQuiz.Domain.Breeds.Entities;
+using DogQuiz.Domain.Shared.Entities;
 using Riok.Mapperly.Abstractions;
 
 namespace DogQuiz.API.Requests;

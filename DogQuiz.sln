@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Domain", "DogQuiz.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.MigrationService", "DogQuiz.MigrationService\DogQuiz.MigrationService.csproj", "{3395CAFE-EBA7-409C-BC0D-D081206F1A3C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{74E569B6-BCFB-44EA-B152-CD26B00418F4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orchestration", "Orchestration", "{74E569B6-BCFB-44EA-B152-CD26B00418F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Images", "DogQuiz.Images\DogQuiz.Images.csproj", "{00B6EBD4-AB8E-4EE0-977D-32012A8DF113}"
 EndProject
@@ -21,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Infrastructure", "DogQuiz.Infrastructure\DogQuiz.Infrastructure.csproj", "{E676681F-C9F3-4E49-980D-E7A15E6C5AC6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.Application", "DogQuiz.Application\DogQuiz.Application.csproj", "{8141DCEB-718A-4C26-B8CA-813EB457E4EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogQuiz.TempUI", "DogQuiz.TempUI\DogQuiz.TempUI.csproj", "{E06155A2-5A64-4730-A9EC-58BC303FBE9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,10 @@ Global
 		{8141DCEB-718A-4C26-B8CA-813EB457E4EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8141DCEB-718A-4C26-B8CA-813EB457E4EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8141DCEB-718A-4C26-B8CA-813EB457E4EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E06155A2-5A64-4730-A9EC-58BC303FBE9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E06155A2-5A64-4730-A9EC-58BC303FBE9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E06155A2-5A64-4730-A9EC-58BC303FBE9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E06155A2-5A64-4730-A9EC-58BC303FBE9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

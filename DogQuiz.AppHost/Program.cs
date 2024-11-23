@@ -2,25 +2,28 @@
 // keycloak guide: https://fiodar.substack.com/p/hosting-a-keycloak-container-in-dotnet-aspire
 // https://apps-on-azure.net/dotnet/2024/2024-09-26-aspire-keycloak-part1.html
 
-using Aspire.Hosting;
-using Aspire.Hosting.Keycloak;
+//using Aspire.Hosting;
+//using Aspire.Hosting.Keycloak;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var sqlserver = builder.AddSqlServer("sqlserver")
+var sqlServer = builder.AddSqlServer("sqlserver")
     .WithLifetime(ContainerLifetime.Persistent);
 
-var sqldb = sqlserver.AddDatabase("sqldb");
+var sqlDatabase = sqlServer.AddDatabase("sqldb");
 
 var migrationService = builder.AddProject<Projects.DogQuiz_MigrationService>("migration")
-    .WithReference(sqldb)
-    .WaitFor(sqldb);
+    .WithReference(sqlDatabase)
+    .WaitFor(sqlDatabase);
 
 var keycloak = builder.AddKeycloak("keycloak", 8080);
 
-builder.AddProject<Projects.DogQuiz_API>("api")
-    .WithReference(sqldb)
+var api = builder.AddProject<Projects.DogQuiz_API>("api")
+    .WithReference(sqlDatabase)
     .WithReference(keycloak)
     .WaitForCompletion(migrationService);
+
+var tempUi = builder.AddProject<Projects.DogQuiz_TempUI>("tempui")
+	.WaitFor(api);
 
 builder.Build().Run();

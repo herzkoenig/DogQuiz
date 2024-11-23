@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DogQuiz.API\DogQuiz.API.csproj" />
     <ProjectReference Include="..\DogQuiz.MigrationService\DogQuiz.MigrationService.csproj" />
+    <ProjectReference Include="..\DogQuiz.TempUI\DogQuiz.TempUI.csproj" />
   </ItemGroup>
 
 </Project>

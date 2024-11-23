@@ -15,4 +15,12 @@
     <ProjectReference Include="..\DogQuiz.Domain\DogQuiz.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EventLogs\" />
+    <Folder Include="Shared\Features\" />
+    <Folder Include="Questions\" />
+    <Folder Include="Quizzes\" />
+    <Folder Include="Users\" />
+  </ItemGroup>
+
 </Project>

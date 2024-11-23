@@ -1,13 +1,7 @@
-using Keycloak.AuthServices.Authentication;
 using Microsoft.EntityFrameworkCore;
 using DogQuiz.API.Middleware;
-using DogQuiz.Application.QuizManagement.Interfaces;
-using DogQuiz.Application.QuizManagement.Services;
 using DogQuiz.Infrastructure;
-using DogQuiz.Application.BreedManagement.Interfaces;
-using DogQuiz.Application.BreedManagement.Services;
-using DogQuiz.Application.GeneralManagement.Interfaces;
-using DogQuiz.Application.GeneralManagement.Services;
+using DogQuiz.Application.Breeds.CreateBreedFact;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,8 +14,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IBreedService, BreedService>();
-builder.Services.AddScoped<IQuizService, QuizService>();
-builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 builder.Services.AddScoped<IBreedFactGeneratorService, BreedFactGeneratorService>();
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(options =>

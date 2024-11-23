@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
-using DogQuiz.Application.BreedManagement.Interfaces;
 using DogQuiz.API.Controllers;
 using DogQuiz.API.Requests;
+using DogQuiz.Application.Breeds.CreateBreedFact;
 
 
 namespace DogQuiz.Tests.UnitTests;

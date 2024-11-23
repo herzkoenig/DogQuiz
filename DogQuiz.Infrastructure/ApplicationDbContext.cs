@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using DogQuiz.Domain.Aggregates.Breeds.Entities;
-using DogQuiz.Domain.Aggregates.Questions.Bases;
-using DogQuiz.Domain.Aggregates.Questions.Entities;
-using DogQuiz.Domain.Aggregates.Users.Entities;
-using DogQuiz.Domain.Aggregates.General.Entities;
+using DogQuiz.Domain.Questions.Bases;
+using DogQuiz.Domain.Questions.Entities;
+using DogQuiz.Domain.Users.Entities;
+using DogQuiz.Domain.Shared.Entities;
+using DogQuiz.Domain.Breeds.Entities;
 
 namespace DogQuiz.Infrastructure;
 

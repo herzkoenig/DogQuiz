@@ -1,6 +1,6 @@
 ﻿using DogQuiz.API.Requests;
-using DogQuiz.Application.BreedManagement.Interfaces;
-using DogQuiz.Domain.Aggregates.Breeds.Validation;
+using DogQuiz.Application.Breeds.CreateBreedFact;
+using DogQuiz.Domain.Breeds.Validation;
 using DogQuiz.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
