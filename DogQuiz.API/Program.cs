@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using DogQuiz.API.Middleware;
+using DogQuiz.Application.Shared;
 using DogQuiz.Infrastructure;
-using DogQuiz.Application.Breeds;
-using DogQuiz.Application.Shared.Features;
 using DogQuiz.Infrastructure.Initialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ICreateBreed, CreateBreed>();
-builder.Services.AddScoped<IGetCountries, GetCountries>();
+// Add all application features/services
+builder.Services.AddApplicationServices();
+
 
 builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("sqldb"), sqlOptions =>
