@@ -16,6 +16,7 @@ public class ApplicationDbContext : DbContext
 	//public DbSet<BreedCollection> BreedCollections => Set<BreedCollection>();
 	public DbSet<BreedMix> BreedMixes => Set<BreedMix>();
 	public DbSet<BreedName> BreedNames => Set<BreedName>();
+	public DbSet<BreedOrigin> BreedOrigins => Set<BreedOrigin>();
 	public DbSet<BreedRole> BreedRoles => Set<BreedRole>();
 	public DbSet<BreedVariety> BreedVarieties => Set<BreedVariety>();
 	public DbSet<NotableOwner> NotableOwners => Set<NotableOwner>();
@@ -46,6 +47,7 @@ public class ApplicationDbContext : DbContext
 		//modelBuilder.ApplyConfiguration(new BreedCollection.BreedCollectionConfiguration());
 		modelBuilder.ApplyConfiguration(new BreedMix.BreedMixConfiguration());
 		modelBuilder.ApplyConfiguration(new BreedName.BreedNameConfiguration());
+		modelBuilder.ApplyConfiguration(new BreedOrigin.BreedOriginConfiguration());
 		modelBuilder.ApplyConfiguration(new BreedRole.BreedRoleConfiguration());
 		modelBuilder.ApplyConfiguration(new BreedVariety.BreedVarietyConfiguration());
 		modelBuilder.ApplyConfiguration(new NotableOwner.NotableOwnerConfiguration());

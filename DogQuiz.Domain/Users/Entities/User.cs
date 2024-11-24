@@ -1,4 +1,5 @@
 ﻿using DogQuiz.Domain.Shared.Constants;
+using DogQuiz.Domain.Shared.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,6 +13,7 @@ public class User
 	public required string Email { get; set; }
 	public bool IsActive { get; set; } = true;
 	public required PermissionRole Role { get; set; }
+	public Country Country { get; set; }
 	public ICollection<Permission> SpecialPermission { get; } = new List<Permission>();
 	// Profile Picture !
 
