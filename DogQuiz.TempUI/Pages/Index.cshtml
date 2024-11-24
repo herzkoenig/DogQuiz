@@ -1,10 +1,43 @@
 ﻿@page
-@model IndexModel
+@model DogQuiz.TempUI.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Breeds";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h1>Breeds</h1>
+
+<div>
+    <a asp-page="./CreateBreed" class="btn btn-primary">Create New Breed</a>
 </div>
+
+@* @if (Model.Breeds.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var breed in Model.Breeds)
+            {
+                <tr>
+                    <td>@breed.Name</td>
+                    <td>@breed.Description</td>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@breed.Id" class="btn btn-info btn-sm">Details</a>
+                        <a asp-page="./Edit" asp-route-id="@breed.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-page="./Delete" asp-route-id="@breed.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No breeds available.</p>
+}
+ *@

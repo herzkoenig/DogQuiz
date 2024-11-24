@@ -5,6 +5,8 @@
 //using Aspire.Hosting;
 //using Aspire.Hosting.Keycloak;
 
+using Aspire.Hosting.ApplicationModel;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
 var sqlServer = builder.AddSqlServer("sqlserver")
@@ -19,11 +21,14 @@ var migrationService = builder.AddProject<Projects.DogQuiz_MigrationService>("mi
 var keycloak = builder.AddKeycloak("keycloak", 8080);
 
 var api = builder.AddProject<Projects.DogQuiz_API>("api")
-    .WithReference(sqlDatabase)
-    .WithReference(keycloak)
-    .WaitForCompletion(migrationService);
+	.WithReference(sqlDatabase)
+	.WithReference(keycloak)
+	.WaitForCompletion(migrationService);
 
 var tempUi = builder.AddProject<Projects.DogQuiz_TempUI>("tempui")
-	.WaitFor(api);
+	//.WithReference(api)
+	.WaitFor(api)
+	.WithEnvironment("API_URL_HTTP", api.GetEndpoint("http"))
+	.WithEnvironment("API_URL_HTTPS", api.GetEndpoint("https"));
 
 builder.Build().Run();

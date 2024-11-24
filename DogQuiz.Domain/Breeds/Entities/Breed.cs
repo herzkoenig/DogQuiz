@@ -5,7 +5,7 @@ using DogQuiz.Domain.Questions.Entities;
 using DogQuiz.Domain.Shared.Bases;
 using DogQuiz.Domain.Shared.Entities;
 using DogQuiz.Domain.Shared.Constants;
-using DogQuiz.Domain.Breeds.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace DogQuiz.Domain.Breeds.Entities;
 
@@ -13,7 +13,8 @@ public class Breed : AuditableEntityWithSoftDelete, IQuestionHolder
 {
 
 	public int Id { get; set; }
-	public required string Name { get; set; }
+	[Required]
+	public string Name { get; set; }
 	public ICollection<BreedName> AdditionalNames { get; } = new List<BreedName>();
 	public ImageDetail? Image { get; set; }
 	public ICollection<ImageDetail> AdditionalImages { get; } = new List<ImageDetail>();
@@ -28,19 +29,6 @@ public class Breed : AuditableEntityWithSoftDelete, IQuestionHolder
 	public ICollection<Question> Questions { get; } = new List<Question>();
 	public ICollection<Fact> Facts { get; } = new List<Fact>();
 	public ICollection<Tag> BreedTags { get; } = new List<Tag>();
-
-	public Breed(string name, string? description = null, int? difficulty = null)
-	{
-		Name = name;
-		Description = description;
-		Difficulty = difficulty;
-	}
-
-	public void AddFact(Fact fact)
-	{
-		BreedValidation.ValidateFact(fact);
-		Facts.Add(fact);
-	}
 
 	public class BreedConfiguration : IEntityTypeConfiguration<Breed>
 	{

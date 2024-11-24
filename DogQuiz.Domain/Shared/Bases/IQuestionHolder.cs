@@ -1,4 +1,6 @@
-﻿namespace DogQuiz.Domain.Questions.Bases;
+﻿using DogQuiz.Domain.Questions.Bases;
+
+namespace DogQuiz.Domain.Shared.Bases;
 
 public interface IQuestionHolder
 {

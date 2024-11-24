@@ -1,4 +1,5 @@
-﻿using DogQuiz.Domain.Shared.Entities;
+﻿using DogQuiz.Domain.Shared.Bases;
+using DogQuiz.Domain.Shared.Entities;
 
 namespace DogQuiz.Domain.Breeds.Entities;
 

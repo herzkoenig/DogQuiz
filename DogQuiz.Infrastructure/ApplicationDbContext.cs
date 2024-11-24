@@ -9,11 +9,9 @@ namespace DogQuiz.Infrastructure;
 
 public class ApplicationDbContext : DbContext
 {
-	// Users
 	public DbSet<Permission> Permissions { get; set; }
 	public DbSet<PermissionRole> PermissionRoles { get; set; }
 	public DbSet<User> Users { get; set; }
-	// Breeds
 	public DbSet<Breed> Breeds => Set<Breed>();
 	//public DbSet<BreedCollection> BreedCollections => Set<BreedCollection>();
 	public DbSet<BreedMix> BreedMixes => Set<BreedMix>();
@@ -22,16 +20,14 @@ public class ApplicationDbContext : DbContext
 	public DbSet<BreedVariety> BreedVarieties => Set<BreedVariety>();
 	public DbSet<NotableOwner> NotableOwners => Set<NotableOwner>();
 	public DbSet<NotableDog> NotableDogs => Set<NotableDog>();
-	// General
 	public DbSet<ImageDetail> ImageDetails => Set<ImageDetail>();
 	public DbSet<Tag> Tags => Set<Tag>();
 	public DbSet<Country> Countries => Set<Country>();
-	// QnA
 	public DbSet<Answer> Answers => Set<Answer>();
 	public DbSet<Fact> Facts => Set<Fact>();
 	public DbSet<Question> Questions => Set<Question>();
 
-#pragma warning disable
+#pragma warning disable CS8618
 	public ApplicationDbContext(DbContextOptions options) : base(options)
 	{
 	}
