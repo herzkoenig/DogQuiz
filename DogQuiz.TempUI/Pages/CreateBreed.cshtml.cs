@@ -1,7 +1,10 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using DogQuiz.TempUI.Services;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DogQuiz.TempUI.Pages;
 
@@ -23,6 +26,7 @@ public class CreateBreedModel : PageModel
 	{
 		try
 		{
+			// Fetch available countries from the API
 			AvailableCountries = await _apiService.GetAsync<List<CountryViewModel>>("/api/countries");
 		}
 		catch
@@ -44,10 +48,10 @@ public class CreateBreedModel : PageModel
 			{
 				Input.Name,
 				Input.Description,
-				Input.Difficulty,
-				Input.HistoricalContext,
-				Input.AdditionalNames,
-				Input.AdditionalImageUrls
+				Origin = Input.Countries,
+				Roles = Input.Roles,
+				BreedTags = Input.BreedTags,
+				AdditionalNames = Input.AdditionalNames
 			};
 
 			await _apiService.PostAsync<object, object>("/api/breeds", payload);
@@ -70,17 +74,19 @@ public class CreateBreedModel : PageModel
 		[StringLength(500)]
 		public string? Description { get; set; }
 
-		[Range(1, 10)]
-		public int? Difficulty { get; set; }
+		[Required]
+		public List<string> Countries { get; set; } = new();
 
-		public string? HistoricalContext { get; set; }
+		public List<string> Roles { get; set; } = new();
+
+		public List<string> BreedTags { get; set; } = new();
+
 		public List<string> AdditionalNames { get; set; } = new();
-		public List<string> AdditionalImageUrls { get; set; } = new();
 	}
 
 	public class CountryViewModel
 	{
 		public string Name { get; set; }
-		public string? TwoLetterCode { get; set; }
+		public string TwoLetterCode { get; set; }
 	}
 }

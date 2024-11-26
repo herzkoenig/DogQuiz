@@ -1,4 +1,5 @@
 ﻿using DogQuiz.Application.Shared.DTOs;
+using DogQuiz.Application.Shared.Mappers;
 using DogQuiz.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 

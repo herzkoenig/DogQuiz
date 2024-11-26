@@ -2,7 +2,7 @@
 using DogQuiz.Application.Shared.Features;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DogQuiz.Application.Shared;
+namespace DogQuiz.Application.Shared.Extensions;
 public static class ServiceRegistrationExtensions
 {
 	public static IServiceCollection AddApplicationServices(this IServiceCollection services)

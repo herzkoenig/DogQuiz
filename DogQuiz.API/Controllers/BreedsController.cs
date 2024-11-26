@@ -1,7 +1,8 @@
-﻿using DogQuiz.Application.Breeds.DTOs;
-using DogQuiz.Application.Breeds;
+﻿using DogQuiz.Application.Breeds;
 using Microsoft.AspNetCore.Mvc;
 using DogQuiz.Application.Shared.DTOs;
+using FluentValidation;
+using DogQuiz.Application.Shared.Mappers;
 
 namespace DogQuiz.API.Controllers;
 
@@ -9,36 +10,40 @@ namespace DogQuiz.API.Controllers;
 [Route("api/[controller]")]
 public class BreedsController : ControllerBase
 {
-	private readonly ICreateBreed _createBreedService;
+	private readonly ICreateBreed _createBreed;
+	private readonly IValidator<CreateBreedDto> _createBreedValidator;
 
-	public BreedsController(ICreateBreed createBreedService)
+	public BreedsController(ICreateBreed createBreed, IValidator<CreateBreedDto> createBreedValidator)
 	{
-		_createBreedService = createBreedService;
+		_createBreed = createBreed;
+		_createBreedValidator = createBreedValidator;
 	}
 
 	[HttpPost]
 	public async Task<IActionResult> CreateBreed([FromBody] CreateBreedDto createBreedDto)
 	{
-		if (createBreedDto == null)
+		// Manual validation using FluentValidation
+		var validationResult = await _createBreedValidator.ValidateAsync(createBreedDto);
+
+		if (!validationResult.IsValid)
 		{
-			return BadRequest("Breed data is required.");
+			// Return validation errors as a 400 Bad Request
+			return BadRequest(new
+			{
+				Errors = validationResult.Errors.Select(err => new
+				{
+					Field = err.PropertyName,
+					Message = err.ErrorMessage
+				})
+			});
 		}
 
-		try
-		{
-			// Create the breed
-			var createdBreed = await _createBreedService.CreateBreedAsync(createBreedDto);
+		// Proceed with creating the breed
+		var createdBreed = await _createBreed.CreateBreedAsync(createBreedDto);
+		var resultDto = BreedMapper.ToGetBreedDto(createdBreed);
 
-			// Map to GetBreedDto
-			var resultDto = BreedMapper.ToGetBreedDto(createdBreed);
-
-			// Return the created breed DTO with a 201 status code
-			return CreatedAtAction(nameof(GetBreedById), new { id = createdBreed.Id }, resultDto);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, $"Internal server error: {ex.Message}");
-		}
+		// Return created resource
+		return CreatedAtAction(nameof(GetBreedById), new { id = createdBreed.Id }, resultDto);
 	}
 
 	[HttpGet("{id}")]

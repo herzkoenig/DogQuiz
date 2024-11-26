@@ -8,7 +8,7 @@
 
 <div id="form-messages" class="alert d-none"></div>
 
-<form id="create-breed-form">
+<form id="create-breed-form" method="post">
     <div class="form-group">
         <label for="name">Name</label>
         <input id="name" name="name" class="form-control" required />
@@ -20,18 +20,18 @@
     </div>
 
     <div class="form-group">
-        <label for="difficulty">Difficulty</label>
-        <input id="difficulty" name="difficulty" type="number" min="1" max="10" class="form-control" />
+        <label for="roles">Roles</label>
+        <input id="roles" name="roles" class="form-control" placeholder="Comma-separated roles" />
     </div>
 
     <div class="form-group">
-        <label for="originText">Origin Text</label>
-        <input id="originText" name="originText" class="form-control" />
+        <label for="breedTags">Breed Tags</label>
+        <input id="breedTags" name="breedTags" class="form-control" placeholder="Comma-separated tags" />
     </div>
 
     <div class="form-group">
-        <label for="historicalContext">Historical Context</label>
-        <textarea id="historicalContext" name="historicalContext" class="form-control"></textarea>
+        <label for="additionalNames">Additional Names</label>
+        <input id="additionalNames" name="additionalNames" class="form-control" placeholder="Comma-separated names" />
     </div>
 
     <div class="form-group">
@@ -44,27 +44,6 @@
         </select>
     </div>
 
-    <div class="form-group">
-        <label for="additionalNames">Additional Names</label>
-        <input id="additionalNames" name="additionalNames" class="form-control" placeholder="Comma-separated names" />
-    </div>
-
-    <div class="form-group">
-        <label for="additionalImageUrls">Additional Image URLs</label>
-        <input id="additionalImageUrls" name="additionalImageUrls" class="form-control" placeholder="Comma-separated URLs" />
-    </div>
-
-@*     <div class="form-group">
-        <label>Roles</label>
-        @foreach (var role in Model.AvailableRoles)
-        {
-            <div>
-                <input type="checkbox" name="roles" value="@role" />
-                <label>@role</label>
-            </div>
-        }
-    </div> *@
-
     <button type="submit" class="btn btn-primary">Create Breed</button>
 </form>
 
@@ -73,21 +52,18 @@
         const form = document.getElementById('create-breed-form');
         const messagesDiv = document.getElementById('form-messages');
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.getElementById('create-breed-form');
-        const messagesDiv = document.getElementById('form-messages');
-
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
 
             const formData = new FormData(form);
+
             const payload = {
                 name: formData.get('name'),
-                description: formData.get('description'),
-                difficulty: formData.get('difficulty'),
-                historicalContext: formData.get('historicalContext'),
-                additionalNames: formData.get('additionalNames').split(',').map(name => name.trim()),
-                additionalImageUrls: formData.get('additionalImageUrls').split(',').map(url => url.trim())
+                description: formData.get('description') || "",
+                origin: Array.from(form.querySelector('#countries').selectedOptions).map(option => option.value),
+                roles: formData.get('roles').split(',').map(r => r.trim()).filter(r => r),
+                breedTags: formData.get('breedTags').split(',').map(bt => bt.trim()).filter(bt => bt),
+                additionalNames: formData.get('additionalNames').split(',').map(an => an.trim()).filter(an => an)
             };
 
             try {
@@ -97,59 +73,28 @@
                     body: JSON.stringify(payload)
                 });
 
-                if (!response.ok) throw new Error(await response.text());
+                    if (!response.ok) {
+                        const errorContent = await response.text();
+                        const error = new Error("API Error");
+                        error.response = errorContent; // Attach response content to error object
+                        throw error;
+                    }
+
                 messagesDiv.textContent = 'Breed created successfully!';
                 messagesDiv.className = 'alert alert-success';
                 form.reset();
             } catch (error) {
-                messagesDiv.textContent = error.message;
+                try {
+                    // Parse error details from response
+                    const responseText = await error.response.text();
+                    const errorDetails = JSON.parse(responseText);
+                    messagesDiv.textContent = errorDetails.Message || "An unexpected error occurred.";
+                } catch {
+                    // Fallback to generic message if parsing fails
+                    messagesDiv.textContent = error.message || "An error occurred. Please try again later.";
+                }
                 messagesDiv.className = 'alert alert-danger';
             }
-        });
-    });
-
-
-        // Submit form via API
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const formData = new FormData(form);
-            const payload = {
-                name: formData.get('name'),
-                description: formData.get('description'),
-                difficulty: formData.get('difficulty'),
-                originText: formData.get('originText'),
-                historicalContext: formData.get('historicalContext'),
-                // selectedCountryIds: Array.from(countriesSelect.selectedOptions).map(option => option.value),
-                additionalNames: formData.get('additionalNames').split(',').map(name => name.trim()),
-                additionalImageUrls: formData.get('additionalImageUrls').split(',').map(url => url.trim()),
-                selectedRoleTypes: Array.from(form.querySelectorAll('input[name="roles"]:checked')).map(role => role.value)
-            };
-
-            fetch('/api/breeds', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        messagesDiv.textContent = 'Breed created successfully!';
-                        messagesDiv.classList.remove('d-none', 'alert-danger');
-                        messagesDiv.classList.add('alert-success');
-                        form.reset();
-                    } else {
-                        return response.json().then(err => {
-                            throw new Error(err.message || 'Failed to create breed.');
-                        });
-                    }
-                })
-                .catch(error => {
-                    messagesDiv.textContent = error.message;
-                    messagesDiv.classList.remove('d-none');
-                    messagesDiv.classList.add('alert-danger');
-                });
         });
     });
 </script>

@@ -1,6 +1,6 @@
 ﻿namespace DogQuiz.Domain.Shared.Constants;
 
-internal static class LengthConstants
+public static class LengthConstants
 {
 	// General Name Lengths
 	public const int NameShortLength = 50;

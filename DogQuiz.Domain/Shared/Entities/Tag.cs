@@ -9,7 +9,7 @@ namespace DogQuiz.Domain.Shared.Entities;
 public class Tag : AuditableEntityWithSoftDelete
 {
 	public int Id { get; set; }
-	public required string Name { get; set; }
+	public string Name { get; set; }
 	public TagType Type { get; set; } = TagType.General;
 
 

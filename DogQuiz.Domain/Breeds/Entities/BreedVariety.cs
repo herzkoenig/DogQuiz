@@ -10,8 +10,8 @@ namespace DogQuiz.Domain.Breeds.Entities;
 public class BreedVariety : AuditableEntityWithSoftDelete, IQuestionHolder
 {
 	public int Id { get; set; }
-	public required string Name { get; set; }
-	public required Breed Breed { get; set; }
+	public string Name { get; set; }
+	public Breed Breed { get; set; }
 	public ICollection<Tag> Tags { get; } = new List<Tag>();
 	public ICollection<Question> Questions { get; } = new List<Question>();
 

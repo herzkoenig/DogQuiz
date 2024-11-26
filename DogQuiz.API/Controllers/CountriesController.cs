@@ -7,24 +7,17 @@ namespace DogQuiz.API.Controllers;
 [Route("api/[controller]")]
 public class CountriesController : ControllerBase
 {
-	private readonly IGetCountries _getCountriesService;
+	private readonly IGetCountries _getCountries;
 
-	public CountriesController(IGetCountries getCountriesService)
+	public CountriesController(IGetCountries getCountries)
 	{
-		_getCountriesService = getCountriesService;
+		_getCountries = getCountries;
 	}
 
 	[HttpGet]
 	public async Task<IActionResult> GetCountries()
 	{
-		try
-		{
-			var countries = await _getCountriesService.GetCountriesAsync();
-			return Ok(countries);
-		}
-		catch (Exception ex)
-		{
-			return StatusCode(500, "An error occurred while fetching countries.");
-		}
+		var countries = await _getCountries.GetCountriesAsync();
+		return Ok(countries);
 	}
 }

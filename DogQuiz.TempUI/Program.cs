@@ -83,8 +83,8 @@ app.Use(async (context, next) =>
 {
 	// Ignore API and Razor Pages routes
 	if (!context.Request.Path.StartsWithSegments("/api") &&
-		!context.Request.Path.StartsWithSegments("/CreateBreed") &&
-		!context.Request.Path.StartsWithSegments("/Privacy") &&
+		//!context.Request.Path.StartsWithSegments("/CreateBreed") &&
+		//!context.Request.Path.StartsWithSegments("/Privacy") &&
 		!System.IO.File.Exists($"wwwroot{context.Request.Path}") &&
 		!context.Request.Path.StartsWithSegments("/"))
 	{

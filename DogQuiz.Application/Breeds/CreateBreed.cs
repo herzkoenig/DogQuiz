@@ -1,5 +1,5 @@
-﻿using DogQuiz.Application.Breeds.DTOs;
-using DogQuiz.Application.Shared.DTOs;
+﻿using DogQuiz.Application.Shared.DTOs;
+using DogQuiz.Application.Shared.Mappers;
 using DogQuiz.Domain.Breeds.Entities;
 using DogQuiz.Infrastructure;
 

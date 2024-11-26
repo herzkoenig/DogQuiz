@@ -2,7 +2,7 @@
 using DogQuiz.Domain.Breeds.Entities;
 using Riok.Mapperly.Abstractions;
 
-namespace DogQuiz.Application.Breeds.DTOs;
+namespace DogQuiz.Application.Shared.Mappers;
 
 [Mapper]
 public static partial class BreedMapper

@@ -13,8 +13,7 @@ public class Breed : AuditableEntityWithSoftDelete, IQuestionHolder
 {
 
 	public int Id { get; set; }
-	[Required]
-	public string Name { get; set; }
+	public string? Name { get; set; }
 	public ICollection<BreedName> AdditionalNames { get; } = new List<BreedName>();
 	public ImageDetail? Image { get; set; }
 	public ICollection<ImageDetail> AdditionalImages { get; } = new List<ImageDetail>();

@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using DogQuiz.API.Middleware;
-using DogQuiz.Application.Shared;
 using DogQuiz.Infrastructure;
 using DogQuiz.Infrastructure.Initialization;
+using FluentValidation;
+using DogQuiz.API.Validators;
+using DogQuiz.Application.Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,19 +15,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add all application features/services
+builder.Services.AddValidatorsFromAssemblyContaining<CreateBreedValidator>();
+
 builder.Services.AddApplicationServices();
 
-
 builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
-	options.UseSqlServer(builder.Configuration.GetConnectionString("sqldb"), sqlOptions =>
-	{
-		// Workaround for https://github.com/dotnet/aspire/issues/1023
-		sqlOptions.ExecutionStrategy(c => new RetryingSqlServerRetryingExecutionStrategy(c));
-	}));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("sqldb"), sqlOptions =>
+                {
+                    // Workaround for https://github.com/dotnet/aspire/issues/1023
+                    sqlOptions.ExecutionStrategy(c => new RetryingSqlServerRetryingExecutionStrategy(c));
+                }));
 builder.EnrichSqlServerDbContext<ApplicationDbContext>(settings =>
-	// Disable Aspire default retries as we're using a custom execution strategy
-	settings.DisableRetry = true);
+                // Disable Aspire default retries as we're using a custom execution strategy
+                settings.DisableRetry = true);
 
 // TODO: Configure Keycloak!
 //builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
@@ -41,42 +43,22 @@ builder.EnrichSqlServerDbContext<ApplicationDbContext>(settings =>
 //	});
 //});
 
-builder.Services.AddScoped<CountrySeeder>();
-
 var app = builder.Build();
-
-
-using (var scope = app.Services.CreateScope())
-{
-	var services = scope.ServiceProvider;
-
-	try
-	{
-		var seeder = services.GetRequiredService<CountrySeeder>();
-		await seeder.SeedAsync(); // Call the async method
-	}
-	catch (Exception ex)
-	{
-		var logger = services.GetRequiredService<ILogger<Program>>();
-		logger.LogError(ex, "An error occurred while seeding the database.");
-		throw;
-	}
-}
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (!app.Environment.IsDevelopment())
 {
-	app.UseExceptionHandler("/Error");
-	app.UseHsts();
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseRouting();

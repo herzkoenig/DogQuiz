@@ -4,6 +4,7 @@ using DogQuiz.Domain.Questions.Entities;
 using DogQuiz.Domain.Users.Entities;
 using DogQuiz.Domain.Shared.Entities;
 using DogQuiz.Domain.Breeds.Entities;
+using DogQuiz.Infrastructure.Initialization;
 
 namespace DogQuiz.Infrastructure;
 
@@ -73,6 +74,8 @@ public class ApplicationDbContext : DbContext
 				}
 			}
 		}
+
+		modelBuilder.SeedCountries();
 
 		// https://blog.jetbrains.com/dotnet/2023/06/14/how-to-implement-a-soft-delete-strategy-with-entity-framework-core/
 
